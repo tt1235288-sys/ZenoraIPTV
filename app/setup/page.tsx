@@ -1,18 +1,18 @@
 'use client';
 
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { CONSTANTS } from '@/lib/seo';
+import Image from 'next/image';
 import { 
-  MonitorSmartphone, Tv, Apple, Laptop, Sparkles, Lock, Zap, ThumbsUp, Users, 
+  MonitorSmartphone, ChevronDown, Tv, Apple, Laptop, Sparkles, Lock, Zap, ThumbsUp, Users, 
   CheckCircle2, PlayCircle, ArrowRight, MessageCircle, Clock, Headphones, 
   Shield, Award, Star, UserPlus, ShoppingBag, Download, Mail, Cpu, Search,
   Settings, Wifi, Smartphone as SmartphoneIcon, TrendingUp, AlertCircle,
   HelpCircle, Globe, Server, Trophy, Film, Calendar, MonitorPlay, X
 } from 'lucide-react';
-import { FadeIn } from '../components/AnimatedSection';
+import { FadeIn, FadeInStagger, FadeInItem } from '../components/AnimatedSection';
 import Link from 'next/link';
-import FAQ from '../components/FAQ';
 
 // Device data
 const devices = [
@@ -22,7 +22,7 @@ const devices = [
   { id: 'pc', name: 'PC / Mac', icon: Laptop, popular: false, steps: 6 },
 ];
 
-// Step data for each device with valuable content
+// Step data for each device
 const stepData = {
   firestick: {
     title: 'Firestick & Android Box',
@@ -55,7 +55,7 @@ const stepData = {
       { 
         number: 4, 
         title: 'Enter Installation Code', 
-        description: `Open the Downloader app. You will see a URL text field. Using your remote, carefully type the following code: 83492. Click "Go" or press the select button on your remote. The Zenora IPTV app will begin downloading automatically. Once the download completes (usually 10-20 seconds), a popup will appear asking if you want to install the app. Click "Install". After installation, you can click "Open" or "Done".`, 
+        description: `Open the Downloader app. You will see a URL text field. Using your remote, carefully type the following code: 83492. Click "Go" or press the select button on your remote. The ${CONSTANTS.FOCUS_KEYWORD} app will begin downloading automatically. Once the download completes (usually 10-20 seconds), a popup will appear asking if you want to install the app. Click "Install". After installation, you can click "Open" or "Done".`, 
         duration: '2 min', 
         icon: SmartphoneIcon, 
         tip: 'Make sure you have a stable internet connection before entering the code. The download speed depends on your connection. If the code doesn\'t work, contact our support for the latest code.' 
@@ -63,7 +63,7 @@ const stepData = {
       { 
         number: 5, 
         title: 'Login with Credentials', 
-        description: `Open the newly installed Zenora IPTV app from your apps section. On the login screen, select "Login with Xtream Codes API" (not "Login with Playlist"). You will see three fields: Server URL / Portal URL, Username, and Password. Enter the information exactly as provided in your welcome email. The Portal URL usually starts with http:// or https://. After entering all details, click "Login" or "Add User". Wait 5-10 seconds for authentication.`, 
+        description: `Open the newly installed ${CONSTANTS.FOCUS_KEYWORD} app from your apps section. On the login screen, select "Login with Xtream Codes API" (not "Login with Playlist"). You will see three fields: Server URL / Portal URL, Username, and Password. Enter the information exactly as provided in your welcome email. The Portal URL usually starts with http:// or https://. After entering all details, click "Login" or "Add User". Wait 5-10 seconds for authentication.`, 
         duration: '3 min', 
         icon: Mail, 
         tip: 'Double-check that you\'re using Xtream Codes login method, not M3U playlist. Copy-paste credentials from your email to avoid typing errors. The login is case-sensitive.' 
@@ -217,7 +217,7 @@ const stepData = {
       { 
         number: 4, 
         title: 'Get Your M3U Link', 
-        description: `Check your welcome email from Zenora IPTV. You will find either an M3U URL (looks like http://your-server.net:8080/get.php?username=xxx&password=xxx&type=m3u&output=ts) or Xtream Codes (Portal URL, Username, Password). For VLC, you will use the M3U URL. Copy the entire M3U URL - you can highlight it and press Ctrl+C (Windows) or Cmd+C (Mac). Keep this URL handy for the next step.`, 
+        description: `Check your welcome email from ${CONSTANTS.FOCUS_KEYWORD}. You will find either an M3U URL (looks like http://your-server.net:8080/get.php?username=xxx&password=xxx&type=m3u&output=ts) or Xtream Codes (Portal URL, Username, Password). For VLC, you will use the M3U URL. Copy the entire M3U URL - you can highlight it and press Ctrl+C (Windows) or Cmd+C (Mac). Keep this URL handy for the next step.`, 
         duration: '1 min', 
         icon: Mail, 
         tip: 'The M3U URL contains your personal credentials - do not share it with anyone. Keep it secure.' 
@@ -242,7 +242,34 @@ const stepData = {
   }
 };
 
-// Step Component with scroll animation - No emojis
+// Setup FAQ Item Component - Unique to Setup Page
+function SetupFAQItem({ question, answer }: { question: string; answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <button
+      onClick={() => setIsOpen(!isOpen)}
+      className={`w-full text-left bg-slate-900 border ${isOpen ? 'border-pink-500/50' : 'border-white/10'} rounded-2xl p-6 hover:border-pink-500/30 transition-all duration-300 group`}
+    >
+      <div className="flex justify-between items-center gap-4">
+        <h3 className={`text-lg md:text-xl font-bold transition-colors ${isOpen ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600' : 'text-white group-hover:text-pink-500/80'} flex items-center gap-3`}>
+          <span className={`${isOpen ? 'bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent' : 'text-white/30'} font-black text-2xl`}>Q.</span> 
+          {question}
+        </h3>
+        <ChevronDown className={`w-6 h-6 flex-shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 text-pink-500' : 'text-white/30 group-hover:text-pink-500/50'}`} />
+      </div>
+      <div 
+        className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-96 mt-4 opacity-100' : 'max-h-0 opacity-0'}`}
+      >
+        <p className="text-white/70 leading-relaxed pl-10 md:pl-12 border-l-2 border-pink-500/30 ml-2 py-2">
+          {answer}
+        </p>
+      </div>
+    </button>
+  );
+}
+
+// Step Component with scroll animation
 function StepItem({ step, index, isLast }: { step: any; index: number; isLast: boolean }) {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
@@ -252,26 +279,24 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
     <div ref={ref} className="relative">
       <div className="flex gap-5 md:gap-6">
         
-        {/* Left Side - Number with animated icon */}
         <div className="flex flex-col items-center">
           <motion.div 
             className={`relative w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center z-10 transition-all duration-500 ${
               isInView 
-                ? 'bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 shadow-[0_0_30px_rgba(139,92,246,0.5)] scale-110' 
-                : 'bg-purple-600/20'
+                ? 'bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 shadow-[0_0_30px_rgba(236,72,153,0.5)] scale-110' 
+                : 'bg-pink-500/20'
             }`}
             initial={{ scale: 0 }}
             animate={{ scale: isInView ? 1 : 0 }}
             transition={{ duration: 0.4, type: 'spring', delay: index * 0.1 }}
           >
             <span className={`text-2xl md:text-3xl font-black transition-all duration-300 ${
-              isInView ? 'text-white' : 'text-purple-600'
+              isInView ? 'text-white' : 'text-pink-500'
             }`}>
               {step.number}
             </span>
           </motion.div>
           
-          {/* Animated connecting line between steps */}
           {!isLast && (
             <motion.div 
               className="relative w-1 h-28 md:h-36 my-3"
@@ -279,19 +304,16 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
               animate={{ opacity: isInView ? 1 : 0 }}
               transition={{ delay: index * 0.15 + 0.3 }}
             >
-              {/* Dotted line background */}
-              <div className="absolute inset-0 bg-[radial-gradient(circle,_#8b5cf6_1px,_transparent_1px)] bg-[length:4px_8px] bg-repeat-y opacity-20" />
-              {/* Solid line that fills on scroll */}
+              <div className="absolute inset-0 bg-[radial-gradient(circle,_#ec4899_1px,_transparent_1px)] bg-[length:4px_8px] bg-repeat-y opacity-20" />
               <motion.div 
                 className="absolute top-0 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-pink-500 via-purple-600 to-blue-600"
                 initial={{ height: 0 }}
                 animate={{ height: isInView ? '100%' : 0 }}
                 transition={{ duration: 0.8, delay: index * 0.15 + 0.2 }}
               />
-              {/* Bouncing dot on line */}
               {isInView && (
                 <motion.div 
-                  className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-purple-600 rounded-full shadow-[0_0_15px_rgba(139,92,246,0.6)]"
+                  className="absolute left-1/2 -translate-x-1/2 w-3 h-3 bg-pink-500 rounded-full shadow-[0_0_15px_rgba(236,72,153,0.6)]"
                   initial={{ top: 0 }}
                   animate={{ top: '100%' }}
                   transition={{ duration: 0.8, delay: index * 0.15 + 0.4, ease: "easeOut" }}
@@ -301,7 +323,6 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
           )}
         </div>
         
-        {/* Right Side - Content Card */}
         <motion.div 
           className="flex-1 pb-16 md:pb-20"
           initial={{ opacity: 0, x: -40 }}
@@ -310,16 +331,16 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
         >
           <div className={`bg-gradient-to-br from-slate-900/80 to-slate-950/80 border rounded-2xl p-6 md:p-8 transition-all duration-500 ${
             isInView 
-              ? 'border-purple-600/50 shadow-[0_0_40px_rgba(139,92,246,0.15)]' 
+              ? 'border-pink-500/50 shadow-[0_0_40px_rgba(236,72,153,0.15)]' 
               : 'border-white/10'
           }`}>
             <div className="flex flex-wrap items-center justify-between gap-4 mb-4">
               <div className="flex items-center gap-3">
                 <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
-                  isInView ? 'bg-purple-600/20' : 'bg-white/5'
+                  isInView ? 'bg-pink-500/20' : 'bg-white/5'
                 }`}>
                   <Icon className={`w-5 h-5 transition-all duration-300 ${
-                    isInView ? 'text-purple-600' : 'text-white/40'
+                    isInView ? 'text-pink-500' : 'text-white/40'
                   }`} />
                 </div>
                 <h3 className={`text-xl md:text-2xl font-bold transition-colors duration-300 ${
@@ -329,7 +350,7 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
                 </h3>
               </div>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5">
-                <Clock className="w-3.5 h-3.5 text-purple-600" />
+                <Clock className="w-3.5 h-3.5 text-pink-500" />
                 <span className="text-white/40 text-xs">{step.duration}</span>
               </div>
             </div>
@@ -338,22 +359,21 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
               {step.description}
             </p>
             
-            {/* Tip Box - appears when step comes into view - No emojis */}
             {isInView && (
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="mt-6 p-4 rounded-xl bg-purple-600/5 border border-purple-600/20"
+                className="mt-6 p-4 rounded-xl bg-pink-500/5 border border-pink-500/20"
               >
                 <div className="flex gap-3">
                   <div className="flex-shrink-0">
-                    <div className="w-8 h-8 rounded-lg bg-purple-600/20 flex items-center justify-center">
-                      <AlertCircle className="w-4 h-4 text-purple-600" />
+                    <div className="w-8 h-8 rounded-lg bg-pink-500/20 flex items-center justify-center">
+                      <AlertCircle className="w-4 h-4 text-pink-500" />
                     </div>
                   </div>
                   <div>
-                    <p className="text-purple-600 font-medium text-sm">Pro Tip</p>
+                    <p className="text-pink-500 font-medium text-sm">Pro Tip</p>
                     <p className="text-white/50 text-sm">{step.tip}</p>
                   </div>
                 </div>
@@ -368,26 +388,56 @@ function StepItem({ step, index, isLast }: { step: any; index: number; isLast: b
 
 export default function SetupPage() {
   const [activeDevice, setActiveDevice] = useState('firestick');
+  const [isVideoOpen, setIsVideoOpen] = useState(false);
   const currentData = stepData[activeDevice as keyof typeof stepData];
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  // Auto-open video popup on page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVideoOpen(true);
+    }, 1500);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  const closeVideo = () => {
+    setIsVideoOpen(false);
+    if (iframeRef.current) {
+      iframeRef.current.src = '';
+    }
+  };
+
+  const openVideo = () => {
+    setIsVideoOpen(true);
+    setTimeout(() => {
+      if (iframeRef.current) {
+        iframeRef.current.src = 'https://www.youtube.com/embed/9pZOoS-1NHg?autoplay=1&rel=0';
+      }
+    }, 100);
+  };
 
   return (
     <div className="flex flex-col min-h-screen bg-slate-950">
       
-      {/* Hero Section - FULL SCREEN */}
+      {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <img
+          <Image
             src="/img/bg-1.webp"
-            alt={`Zenora IPTV device setup guide`}
+            alt={`${CONSTANTS.FOCUS_KEYWORD} device setup guide - Easy Installation Tutorial`}
+            width={1920}
+            height={1080}
+            priority
             className="w-full h-full object-cover"
+            sizes="100vw"
+            quality={85}
           />
           <div className="absolute inset-0 bg-black/60" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent" />
         </div>
         
-        {/* Square Pattern Overlay */}
         <div 
           className="absolute inset-0 z-0 opacity-10"
           style={{ 
@@ -399,13 +449,12 @@ export default function SetupPage() {
           }}
         />
         
-        {/* Glow Effect */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-600/10 blur-[150px] rounded-full pointer-events-none z-0" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/10 blur-[150px] rounded-full pointer-events-none z-0" />
         
         <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 via-purple-600/10 to-blue-600/10 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-600/20 mb-6">
-              <Sparkles className="w-4 h-4 text-purple-600" />
+            <div className="inline-flex items-center gap-2 bg-pink-500/10 backdrop-blur-sm px-4 py-2 rounded-full border border-pink-500/20 mb-6">
+              <Sparkles className="w-4 h-4 text-pink-500" />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 font-bold text-sm uppercase tracking-wider">Easy Setup Guide</span>
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight uppercase mb-6">
@@ -415,20 +464,19 @@ export default function SetupPage() {
               </span>
             </h1>
             <p className="text-xl text-white/70 font-medium max-w-2xl mx-auto leading-relaxed">
-              Follow the steps below to quickly set up your account with Zenora IPTV and start streaming without delays.
+              Follow the steps below to quickly set up your {CONSTANTS.FOCUS_KEYWORD} account and start streaming without delays.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-8 text-white/40 text-sm">
-              <span className="flex items-center gap-2"><Lock className="w-3.5 h-3.5 text-purple-600/60" /> Secure Setup</span>
+              <span className="flex items-center gap-2"><Lock className="w-3.5 h-3.5 text-pink-500/60" /> Secure Setup</span>
               <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5 text-pink-500/60" /> 5-Minute Setup</span>
-              <span className="flex items-center gap-2"><Headphones className="w-3.5 h-3.5 text-blue-600/60" /> 24/7 Support</span>
-              <span className="flex items-center gap-2"><Users className="w-3.5 h-3.5 text-purple-600/60" /> 20,000+ Users</span>
+              <span className="flex items-center gap-2"><Headphones className="w-3.5 h-3.5 text-purple-600/60" /> 24/7 Support</span>
+              <span className="flex items-center gap-2"><Users className="w-3.5 h-3.5 text-pink-500/60" /> 20,000+ Users</span>
             </div>
-
           </FadeIn>
         </div>
       </section>
 
-      {/* Device Selection - Simple Grid */}
+      {/* Device Selection */}
       <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
@@ -438,7 +486,7 @@ export default function SetupPage() {
             </span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            Select your platform below for step-by-step instructions
+            Select your platform below for step-by-step {CONSTANTS.FOCUS_KEYWORD} setup instructions
           </p>
         </FadeIn>
         
@@ -452,7 +500,7 @@ export default function SetupPage() {
                 onClick={() => setActiveDevice(device.id)}
                 className={`relative p-6 rounded-2xl text-center transition-all duration-300 cursor-pointer ${
                   isActive 
-                    ? 'bg-gradient-to-br from-purple-600/20 to-transparent border-2 border-purple-600/50 shadow-[0_0_30px_rgba(139,92,246,0.15)]' 
+                    ? 'bg-gradient-to-br from-pink-500/20 to-transparent border-2 border-pink-500/50 shadow-[0_0_30px_rgba(236,72,153,0.15)]' 
                     : 'bg-white/5 border border-white/10 hover:border-pink-500/30'
                 }`}
               >
@@ -463,9 +511,9 @@ export default function SetupPage() {
                   </div>
                 )}
                 <div className={`w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-4 transition-all ${
-                  isActive ? 'bg-purple-600/20' : 'bg-purple-600/10'
+                  isActive ? 'bg-pink-500/20' : 'bg-pink-500/10'
                 }`}>
-                  <Icon className={`w-8 h-8 ${isActive ? 'text-purple-600' : 'text-white/60'}`} />
+                  <Icon className={`w-8 h-8 ${isActive ? 'text-pink-500' : 'text-white/60'}`} />
                 </div>
                 <h3 className={`text-lg font-bold mb-2 ${isActive ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600' : 'text-white'}`}>{device.name}</h3>
                 <p className="text-white/40 text-xs">{device.steps} easy steps</p>
@@ -475,14 +523,13 @@ export default function SetupPage() {
         </div>
       </section>
 
-      {/* Step Process Section - Vertical Timeline with Scroll Animation */}
+      {/* Step Process Section */}
       <section className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-600/10 mb-4">
-            <currentData.icon className="w-4 h-4 text-purple-600" />
-            <span className="text-purple-600 font-bold text-sm">{currentData.title}</span>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-500/10 mb-4">
+            <currentData.icon className="w-4 h-4 text-pink-500" />
+            <span className="text-pink-500 font-bold text-sm">{currentData.title}</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-black text-white mb-4">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">
@@ -490,11 +537,10 @@ export default function SetupPage() {
             </span>
           </h2>
           <p className="text-white/50 text-sm">
-            Scroll down to discover each step • Each step comes to life as you scroll
+            Follow these {CONSTANTS.FOCUS_KEYWORD} setup steps • Each step comes to life as you scroll
           </p>
         </div>
 
-        {/* Timeline Steps */}
         <div className="relative">
           {currentData.steps.map((step, index) => (
             <StepItem 
@@ -506,16 +552,15 @@ export default function SetupPage() {
           ))}
         </div>
 
-        {/* Completion Message */}
         <motion.div 
-          className="text-center mt-8 p-8 rounded-2xl bg-gradient-to-r from-purple-600/10 to-transparent border border-purple-600/20"
+          className="text-center mt-8 p-8 rounded-2xl bg-gradient-to-r from-pink-500/10 to-transparent border border-pink-500/20"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <CheckCircle2 className="w-14 h-14 text-purple-600 mx-auto mb-4" />
-          <h3 className="text-2xl font-bold text-white mb-3">Setup Complete!</h3>
+          <CheckCircle2 className="w-14 h-14 text-pink-500 mx-auto mb-4" />
+          <h3 className="text-2xl font-bold text-white mb-3">{CONSTANTS.FOCUS_KEYWORD} Setup Complete!</h3>
           <p className="text-white/60 text-base max-w-md mx-auto mb-6">
             You've successfully completed all steps. Start enjoying premium entertainment with access to 15,000+ live channels and 60,000+ VODs.
           </p>
@@ -538,101 +583,132 @@ export default function SetupPage() {
         </motion.div>
       </section>
 
-{/* Support Section */}
-<section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-    
-    {/* Video Tutorial with Popup */}
-    <div className="bg-gradient-to-br from-slate-900/50 to-slate-950/50 border border-white/10 rounded-2xl p-8 text-center hover:border-purple-600/30 transition-all group">
-      <div className="w-16 h-16 rounded-xl bg-purple-600/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-600/20 transition-colors">
-        <PlayCircle className="w-8 h-8 text-purple-600" />
-      </div>
-      <h3 className="text-xl font-bold text-white mb-2">Video Tutorial</h3>
-      <p className="text-white/50 text-sm mb-4">Watch our step-by-step video guide for visual learners</p>
-      <button 
-        onClick={() => {
-          const modal = document.getElementById('videoModal');
-          const iframe = document.getElementById('youtubeIframe') as HTMLIFrameElement;
-          if (modal && iframe) {
-            modal.style.display = 'flex';
-            iframe.src = 'https://www.youtube.com/embed/9pZOoS-1NHg?autoplay=1&rel=0';
-          }
-        }}
-        className="inline-flex items-center gap-2 text-purple-600 font-medium text-sm hover:gap-3 transition-all cursor-pointer"
-      >
-        Watch Now <ArrowRight className="w-4 h-4" />
-      </button>
-    </div>
+      {/* Support Section */}
+      <section className="py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <div className="bg-gradient-to-br from-slate-900/50 to-slate-950/50 border border-white/10 rounded-2xl p-8 text-center hover:border-pink-500/30 transition-all group">
+            <div className="w-16 h-16 rounded-xl bg-pink-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-pink-500/20 transition-colors">
+              <PlayCircle className="w-8 h-8 text-pink-500" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Video Tutorial</h3>
+            <p className="text-white/50 text-sm mb-4">Watch our step-by-step {CONSTANTS.FOCUS_KEYWORD} video guide for visual learners</p>
+            <button 
+              onClick={openVideo}
+              className="inline-flex items-center gap-2 text-pink-500 font-medium text-sm hover:gap-3 transition-all cursor-pointer"
+            >
+              Watch Now <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
 
-    {/* WhatsApp Support */}
-    <div className="bg-gradient-to-br from-slate-900/50 to-slate-950/50 border border-white/10 rounded-2xl p-8 text-center hover:border-purple-600/30 transition-all group">
-      <div className="w-16 h-16 rounded-xl bg-green-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500/20 transition-colors">
-        <MessageCircle className="w-8 h-8 text-green-500" />
-      </div>
-      <h3 className="text-xl font-bold text-white mb-2">24/7 WhatsApp Support</h3>
-      <p className="text-white/50 text-sm mb-4">Get instant help from our support team on WhatsApp</p>
-      <a 
-        href="https://wa.me/447868196544?text=Hello%20Zenora%20IPTV%2C%20I%20need%20help%20with%20setup"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 text-green-500 font-medium text-sm hover:gap-3 transition-all cursor-pointer"
-      >
-        Chat on WhatsApp <ArrowRight className="w-4 h-4" />
-      </a>
-    </div>
-  </div>
-</section>
+          <div className="bg-gradient-to-br from-slate-900/50 to-slate-950/50 border border-white/10 rounded-2xl p-8 text-center hover:border-pink-500/30 transition-all group">
+            <div className="w-16 h-16 rounded-xl bg-green-500/10 flex items-center justify-center mx-auto mb-4 group-hover:bg-green-500/20 transition-colors">
+              <MessageCircle className="w-8 h-8 text-green-500" />
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">24/7 WhatsApp Support</h3>
+            <p className="text-white/50 text-sm mb-4">Get instant {CONSTANTS.FOCUS_KEYWORD} setup help from our support team</p>
+            <a 
+              href="https://wa.me/447868196544?text=Hello%20Zenora%20IPTV%2C%20I%20need%20help%20with%20setup"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 text-green-500 font-medium text-sm hover:gap-3 transition-all cursor-pointer"
+            >
+              Chat on WhatsApp <ArrowRight className="w-4 h-4" />
+            </a>
+          </div>
+        </div>
+      </section>
 
-{/* Video Modal - Add this right after the support section */}
-<div 
-  id="videoModal" 
-  className="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 backdrop-blur-md"
-  onClick={(e) => {
-    if (e.target === e.currentTarget) {
-      const modal = document.getElementById('videoModal');
-      const iframe = document.getElementById('youtubeIframe') as HTMLIFrameElement;
-      if (modal && iframe) {
-        modal.style.display = 'none';
-        iframe.src = '';
-      }
-    }
-  }}
->
-  <div className="relative w-full max-w-4xl mx-4">
-    <button 
-      onClick={() => {
-        const modal = document.getElementById('videoModal');
-        const iframe = document.getElementById('youtubeIframe') as HTMLIFrameElement;
-        if (modal && iframe) {
-          modal.style.display = 'none';
-          iframe.src = '';
-        }
-      }}
-      className="absolute -top-12 right-0 text-white/60 hover:text-purple-600 transition-colors cursor-pointer flex items-center gap-2 text-sm"
-    >
-      <X className="w-5 h-5" /> Close
-    </button>
-    <div className="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl border border-purple-600/30">
-        <iframe
-        id="youtubeIframe"
-        className="absolute top-0 left-0 w-full h-full"
-        src="https://www.youtube.com/embed/9pZOoS-1NHg?autoplay=1&rel=0"
-        title="YouTube video player - Zenora IPTV Setup Guide"
-        frameBorder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerPolicy="strict-origin-when-cross-origin"
-        allowFullScreen
-        />
-    </div>
-    <div className="mt-4 text-center">
-      <p className="text-white/50 text-sm">How to setup Zenora IPTV on your device - Complete Guide</p>
-    </div>
-  </div>
-</div>
+      {/* Video Modal */}
+      {isVideoOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              closeVideo();
+            }
+          }}
+        >
+          <div className="relative w-full max-w-4xl mx-4">
+            <button 
+              onClick={closeVideo}
+              className="absolute -top-12 right-0 text-white/60 hover:text-pink-500 transition-colors cursor-pointer flex items-center gap-2 text-sm z-10"
+            >
+              <X className="w-5 h-5" /> Close Video
+            </button>
+            
+            <div className="relative pb-[56.25%] h-0 rounded-2xl overflow-hidden shadow-2xl border border-pink-500/30 bg-black">
+              <iframe
+                ref={iframeRef}
+                className="absolute top-0 left-0 w-full h-full"
+                src="https://www.youtube.com/embed/9pZOoS-1NHg?autoplay=1&rel=0&modestbranding=1"
+                title={`${CONSTANTS.FOCUS_KEYWORD} Setup Guide - Complete Tutorial`}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+            
+            <div className="mt-4 text-center">
+              <p className="text-white/50 text-sm">How to setup {CONSTANTS.FOCUS_KEYWORD} on your device - Complete Guide</p>
+            </div>
+          </div>
+        </div>
+      )}
 
-      {/* FAQ Section */}
-      <div className="max-w-4xl mx-auto w-full px-4 sm:px-6 lg:px-8 pb-24">
-        <FAQ />
+      {/* FAQ Section - UNIQUE TO SETUP PAGE */}
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-24 relative">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-pink-500/5 blur-[120px] rounded-full pointer-events-none"></div>
+        
+        <FadeIn className="text-center mb-16 relative z-10">
+          <div className="inline-flex items-center gap-2 bg-pink-500/10 backdrop-blur-sm px-4 py-2 rounded-full border border-pink-500/20 mb-6">
+            <HelpCircle className="w-4 h-4 text-pink-500" />
+            <span className="text-pink-500 font-bold text-sm uppercase tracking-wider">Setup FAQ</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-black text-white mb-6 uppercase tracking-tight">
+            {CONSTANTS.FOCUS_KEYWORD}{' '}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">
+              Setup Guide
+            </span>
+          </h2>
+          <p className="text-white/60 text-lg">Common questions about installing and setting up {CONSTANTS.FOCUS_KEYWORD} on your devices.</p>
+        </FadeIn>
+        
+        <FadeInStagger className="space-y-4 relative z-10">
+          <SetupFAQItem 
+            question={`How to setup ${CONSTANTS.FOCUS_KEYWORD} on Firestick?`}
+            answer={`Setting up ${CONSTANTS.FOCUS_KEYWORD} on Firestick is easy: Enable "Apps from Unknown Sources" in Developer Options, install the Downloader app, enter activation code 83492, download the ${CONSTANTS.FOCUS_KEYWORD} app, login with your credentials, and start streaming. Complete setup takes under 5 minutes.`}
+          />
+          <SetupFAQItem 
+            question={`How to setup ${CONSTANTS.FOCUS_KEYWORD} with IPTV Smarters Pro?`}
+            answer={`To use ${CONSTANTS.FOCUS_KEYWORD} with IPTV Smarters Pro: Download the app from your device's app store, select "Login with Xtream Codes API", enter your Portal URL, Username, and Password provided in your welcome email. The app will load your ${CONSTANTS.FOCUS_KEYWORD} channel list automatically.`}
+          />
+          <SetupFAQItem 
+            question={`What devices are compatible with ${CONSTANTS.FOCUS_KEYWORD}?`}
+            answer={`${CONSTANTS.FOCUS_KEYWORD} is compatible with Firestick, Android TV boxes, Smart TVs (Samsung, LG, Sony), Apple TV, iPhone/iPad, Windows PC, Mac computers, and MAG boxes. You can install on unlimited devices with simultaneous streams based on your plan.`}
+          />
+          <SetupFAQItem 
+            question={`How long does ${CONSTANTS.FOCUS_KEYWORD} setup take?`}
+            answer={`The ${CONSTANTS.FOCUS_KEYWORD} setup process takes 5-10 minutes. This includes installing the app, logging in with your credentials, and loading the channel list. Most users are streaming within 5 minutes of receiving their login details.`}
+          />
+          <SetupFAQItem 
+            question={`What is the ${CONSTANTS.FOCUS_KEYWORD} activation code for Downloader?`}
+            answer={`The official ${CONSTANTS.FOCUS_KEYWORD} activation code for Downloader on Firestick is 83492. Enter this code in Downloader to download and install the official ${CONSTANTS.FOCUS_KEYWORD} application.`}
+          />
+          <SetupFAQItem 
+            question={`Do I need a VPN to use ${CONSTANTS.FOCUS_KEYWORD}?`}
+            answer={`While ${CONSTANTS.FOCUS_KEYWORD} works perfectly without a VPN, we recommend using one for enhanced privacy and to access geo-restricted content. Our Ultimate plan includes free VPN access for subscribers.`}
+          />
+          <SetupFAQItem 
+            question={`What internet speed is required for ${CONSTANTS.FOCUS_KEYWORD}?`}
+            answer={`For optimal ${CONSTANTS.FOCUS_KEYWORD} streaming, we recommend at least 15 Mbps for HD content and 30 Mbps for 4K Ultra HD. A wired ethernet connection provides the most stable experience.`}
+          />
+          <SetupFAQItem 
+            question={`Can I use ${CONSTANTS.FOCUS_KEYWORD} on multiple devices at once?`}
+            answer={`You can install ${CONSTANTS.FOCUS_KEYWORD} on unlimited devices. The number of simultaneous streams depends on your plan: Starter supports 1 device, Value supports 2 devices, and Ultimate supports 3 devices.`}
+          />
+        </FadeInStagger>
       </div>
     </div>
   );

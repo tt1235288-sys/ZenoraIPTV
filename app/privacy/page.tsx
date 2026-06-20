@@ -20,7 +20,7 @@ export default function PrivacyPage() {
             Privacy <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Policy</span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            At Zenora IPTV, we take your privacy seriously. Learn how we collect, use, and protect your information.
+            At {CONSTANTS.BRAND_NAME}, we take your privacy seriously. Learn how we collect, use, and protect your information.
           </p>
           <p className="text-sm text-white/40 mt-4">
             Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -51,7 +51,7 @@ export default function PrivacyPage() {
           
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">1. Information We Collect</h2>
           <p className="text-white/70 leading-relaxed mb-4">
-            When you use Zenora IPTV, we may collect the following types of information:
+            When you use {CONSTANTS.BRAND_NAME}, we may collect the following types of information:
           </p>
           <ul className="space-y-3 mb-6">
             {[
@@ -151,7 +151,7 @@ export default function PrivacyPage() {
           <p className="text-white/70 leading-relaxed mb-6">
             We may use third-party service providers to assist with payment processing, analytics, and customer support. 
             These providers are contractually obligated to protect your information and only use it for the purposes 
-            specified by Zenora IPTV.
+            specified by {CONSTANTS.BRAND_NAME}.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">6. Your Rights</h2>

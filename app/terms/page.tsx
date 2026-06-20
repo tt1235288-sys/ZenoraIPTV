@@ -20,7 +20,7 @@ export default function TermsPage() {
             Terms of <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Service</span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Please read these terms carefully before using Zenora IPTV services.
+            Please read these terms carefully before using {CONSTANTS.BRAND_NAME} services.
           </p>
           <p className="text-sm text-white/40 mt-4">
             Last Updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -41,7 +41,7 @@ export default function TermsPage() {
             </div>
             <div>
               <p className="text-white/80 text-sm leading-relaxed">
-                <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Acceptance of Terms:</strong> By accessing or subscribing to Zenora IPTV, 
+                <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Acceptance of Terms:</strong> By accessing or subscribing to {CONSTANTS.BRAND_NAME}, 
                 you agree to be bound by these Terms of Service and our Privacy Policy.
               </p>
             </div>
@@ -52,7 +52,7 @@ export default function TermsPage() {
           
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">1. Description of Service</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            Zenora IPTV ("Zenora IPTV", "we", "us", or "our") provides a digital streaming service 
+            {CONSTANTS.BRAND_NAME} ("{CONSTANTS.BRAND_NAME}", "we", "us", or "our") provides a digital streaming service 
             that allows subscribers to access live television channels, video-on-demand content, and related features 
             (the "Service"). The Service is intended for personal, non-commercial use only.
           </p>
@@ -94,7 +94,7 @@ export default function TermsPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">3. Subscription Plans and Payments</h2>
           <p className="text-white/70 leading-relaxed mb-4">
-            Zenora IPTV offers various subscription plans as described on our Pricing page. By subscribing, you agree to:
+            {CONSTANTS.BRAND_NAME} offers various subscription plans as described on our Pricing page. By subscribing, you agree to:
           </p>
           <ul className="space-y-3 mb-6">
             {[
@@ -188,7 +188,7 @@ export default function TermsPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">7. Intellectual Property</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            The Service, including its code, design, logos, and content (excluding third-party content), is owned by Zenora IPTV 
+            The Service, including its code, design, logos, and content (excluding third-party content), is owned by {CONSTANTS.BRAND_NAME} 
             and protected by copyright, trademark, and other intellectual property laws. You may not copy, modify, or create derivative works 
             of our intellectual property without our express written consent.
           </p>
@@ -201,14 +201,14 @@ export default function TermsPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">9. Limitation of Liability</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            TO THE MAXIMUM EXTENT PERMITTED BY LAW, Zenora IPTV SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
+            TO THE MAXIMUM EXTENT PERMITTED BY LAW, {CONSTANTS.BRAND_NAME} SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, 
             CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF THE SERVICE.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">10. Termination</h2>
           <p className="text-white/70 leading-relaxed mb-6">
             We may terminate or suspend your account immediately, without prior notice, for conduct that violates these Terms 
-            or is otherwise harmful to Zenora IPTV, other users, or third parties. Upon termination, your right to 
+            or is otherwise harmful to {CONSTANTS.BRAND_NAME}, other users, or third parties. Upon termination, your right to 
             use the Service will cease immediately.
           </p>
 
@@ -230,7 +230,7 @@ export default function TermsPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">11. Governing Law</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            These Terms shall be governed by and construed in accordance with the laws applicable to zenoraiptv.live, 
+            These Terms shall be governed by and construed in accordance with the laws applicable to {CONSTANTS.DOMAIN}, 
             without regard to its conflict of law provisions.
           </p>
 

@@ -8,11 +8,11 @@ export default function NotFound() {
   return (
     <div className="flex flex-col min-h-screen bg-black relative overflow-hidden">
       
-      {/* Background Image with overlay - More visible now */}
+      {/* Background Image with overlay */}
       <div className="absolute inset-0 z-0">
         <img
           src="/img/error-404.webp"
-          alt={`Zenora IPTV - Page Not Found Background`}
+          alt={`${CONSTANTS?.FOCUS_KEYWORD || 'IPTV'} - Page Not Found Background`}
           className="w-full h-full object-cover opacity-80"
           onError={(e) => {
             (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1920&auto=format";
@@ -21,14 +21,14 @@ export default function NotFound() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-slate-950/60 to-black/80" />
       </div>
 
-      {/* Animated glow effect */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-pink-500/15 via-purple-600/15 to-blue-600/15 rounded-full blur-[120px] animate-pulse" />
+      {/* Animated glow effect - Updated to Pink */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-500/15 rounded-full blur-[120px] animate-pulse" />
 
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 py-24 text-center">
         
         <div className="max-w-3xl mx-auto">
           
-          {/* 404 Number with Gradient */}
+          {/* 404 Number with Gradient - Updated to Pink/Purple/Blue */}
           <div className="mb-8">
             <div className="text-[120px] sm:text-[160px] md:text-[200px] font-black leading-none tracking-tighter">
               <span className="bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent">
@@ -46,9 +46,13 @@ export default function NotFound() {
             Page Not Found
           </h1>
           
+          <p className="text-white/60 text-lg mb-8 max-w-xl mx-auto">
+            Oops! The page you're looking for doesn't exist or has been moved. Let's get you back on track with {CONSTANTS?.BRAND_NAME || 'Zenora IPTV'}.
+          </p>
+          
           <div className="w-24 h-1 bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 mx-auto mb-6" />
           
-          {/* Quick Links Grid */}
+          {/* Quick Links Grid - Updated hover colors */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto mb-12">
             <Link
               href="/"
@@ -83,11 +87,11 @@ export default function NotFound() {
             </Link>
           </div>
 
-          {/* Main CTA Buttons */}
+          {/* Main CTA Buttons - Updated to Gradient */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <Link
               href="/"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white font-black uppercase tracking-widest text-sm hover:opacity-90 hover:scale-105 transition-all shadow-[0_0_30px_rgba(236,72,153,0.3)]"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white font-black uppercase tracking-widest text-sm hover:scale-105 transition-all shadow-[0_0_30px_rgba(236,72,153,0.3)]"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Home
@@ -95,12 +99,16 @@ export default function NotFound() {
             
             <Link
               href="/pricing"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-purple-600 transition-all"
+              className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white font-bold text-sm hover:bg-white/20 hover:border-pink-500 transition-all"
             >
-              View Plans
+              View {CONSTANTS?.BRAND_NAME || 'Zenora IPTV'} Plans
             </Link>
           </div>
 
+          {/* Footer Text */}
+          <p className="text-white/30 text-sm">
+            {CONSTANTS?.BRAND_NAME || 'Zenora IPTV'} • Premium IPTV Service
+          </p>
         </div>
       </div>
     </div>

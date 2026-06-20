@@ -38,65 +38,65 @@ export default function PricingPage() {
   return (
     <div className="min-h-screen bg-slate-950 flex flex-col">
       
-{/* Hero Section - Full Screen Only */}
-<section className="relative min-h-screen flex items-center justify-center overflow-hidden border-b border-white/5">
-  
-  {/* Background Image */}
-  <div className="absolute inset-0 z-0">
-    <img
-      src="/img/bg-2.webp"
-      alt={`Zenora IPTV premium IPTV pricing plans`}
-      className="w-full h-full object-cover"
-    />
-    <div className="absolute inset-0 bg-black/50" />
-    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent" />
-  </div>
-  
-  {/* Square Pattern Overlay - ONLY IN HERO */}
-  <div 
-    className="absolute inset-0 z-0 opacity-10"
-    style={{ 
-      backgroundImage: `
-        linear-gradient(to right, #ec4899 1px, transparent 1px),
-        linear-gradient(to bottom, #8b5cf6 1px, transparent 1px)
-      `,
-      backgroundSize: '50px 50px',
-    }}
-  />
-  
-  {/* Glow Effect */}
-  <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-500/8 blur-[120px] rounded-full pointer-events-none z-0" />
-  
-  <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-    <FadeIn>
-      <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 via-purple-600/10 to-blue-600/10 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-600/20 mb-6">
-        <Sparkles className="w-4 h-4 text-purple-600" />
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 font-bold text-sm uppercase tracking-wider">Best Value Plans 2025</span>
-      </div>
-      <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight uppercase mb-6">
-        Choose Your IPTV Subscription Plan{' '}
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">
-          Best Pricing
-        </span>
-      </h1>
-      <p className="text-xl text-white/70 font-medium max-w-2xl mx-auto leading-relaxed">
-        Enjoy live TV, movies, and sports from anywhere with a fast, reliable streaming experience.
-      </p>
-      <div className="flex flex-wrap justify-center gap-6 mt-8 text-white/40 text-sm">
-        <span className="flex items-center gap-2"><Lock className="w-3.5 h-3.5 text-purple-600/60" /> Cancel Anytime</span>
-        <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5 text-pink-500/60" /> Instant Activation</span>
-        <span className="flex items-center gap-2"><ThumbsUp className="w-3.5 h-3.5 text-blue-600/60" /> 7-Day Money-Back</span>
-      </div>
-    </FadeIn>
-  </div>
-</section>
+      {/* Hero Section - Full Screen Only */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden border-b border-white/5">
+        
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/img/bg-2.webp"
+            alt={`${CONSTANTS.FOCUS_KEYWORD} premium IPTV pricing plans`}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/60 to-transparent" />
+        </div>
+        
+        {/* Square Pattern Overlay - ONLY IN HERO */}
+        <div 
+          className="absolute inset-0 z-0 opacity-10"
+          style={{ 
+            backgroundImage: `
+              linear-gradient(to right, #ec4899 1px, transparent 1px),
+              linear-gradient(to bottom, #8b5cf6 1px, transparent 1px)
+            `,
+            backgroundSize: '50px 50px',
+          }}
+        />
+        
+        {/* Glow Effect */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-pink-500/8 blur-[120px] rounded-full pointer-events-none z-0" />
+        
+        <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
+          <FadeIn>
+            <div className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500/10 via-purple-600/10 to-blue-600/10 backdrop-blur-sm px-4 py-2 rounded-full border border-purple-600/20 mb-6">
+              <Sparkles className="w-4 h-4 text-purple-600" />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 font-bold text-sm uppercase tracking-wider">Best Value Plans 2026</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tight uppercase mb-6">
+              Choose Your IPTV Subscription Plan{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">
+                Best Pricing
+              </span>
+            </h1>
+            <p className="text-xl text-white/70 font-medium max-w-2xl mx-auto leading-relaxed">
+              Enjoy live TV, movies, and sports from anywhere with a fast, reliable streaming experience from {CONSTANTS.FOCUS_KEYWORD}.
+            </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-8 text-white/40 text-sm">
+              <span className="flex items-center gap-2"><Lock className="w-3.5 h-3.5 text-purple-600/60" /> Cancel Anytime</span>
+              <span className="flex items-center gap-2"><Zap className="w-3.5 h-3.5 text-pink-500/60" /> Instant Activation</span>
+              <span className="flex items-center gap-2"><ThumbsUp className="w-3.5 h-3.5 text-blue-600/60" /> 7-Day Money-Back</span>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
       {/* Main Pricing Cards Component */}
       <div className="-mt-16 w-full relative z-20">
         <PricingSection />
       </div>
 
-      {/* Features Section - Boxed Design like Homepage */}
+      {/* Features Section - Boxed Design */}
       <section className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeIn className="text-center mb-12">
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
@@ -106,7 +106,7 @@ export default function PricingPage() {
             </span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
-            All Zenora IPTV subscriptions come with these premium features
+            All {CONSTANTS.FOCUS_KEYWORD} subscriptions come with these premium features
           </p>
         </FadeIn>
         
@@ -146,7 +146,7 @@ export default function PricingPage() {
               </span>
             </h2>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Find the perfect plan for your streaming needs
+              Find the perfect {CONSTANTS.FOCUS_KEYWORD} plan for your streaming needs
             </p>
           </FadeIn>
 
@@ -191,7 +191,7 @@ export default function PricingPage() {
           <h2 className="text-3xl md:text-5xl font-black text-white mb-4 uppercase tracking-tight">
             Why Choose{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">
-              Zenora IPTV
+              {CONSTANTS.FOCUS_KEYWORD}
             </span>
           </h2>
           <p className="text-white/60 text-lg max-w-2xl mx-auto">
@@ -243,7 +243,7 @@ export default function PricingPage() {
           </div>
           <h3 className="text-2xl md:text-3xl font-black text-white mb-3">7-Day Money-Back Guarantee</h3>
           <p className="text-white/60 max-w-2xl mx-auto text-sm leading-relaxed">
-            Try Zenora IPTV risk-free for 7 days. Not satisfied? Get a full refund. No questions asked.
+            Try {CONSTANTS.FOCUS_KEYWORD} risk-free for 7 days. Not satisfied? Get a full refund. No questions asked.
           </p>
         </div>
       </section>
@@ -259,36 +259,36 @@ export default function PricingPage() {
               Questions
             </span>
           </h2>
-          <p className="text-white/60 text-lg">Everything you need to know about our pricing and plans.</p>
+          <p className="text-white/60 text-lg">Everything you need to know about our {CONSTANTS.FOCUS_KEYWORD} pricing and plans.</p>
         </FadeIn>
         
         <FadeInStagger className="space-y-4 relative z-10">
           <FAQItem 
-            question="What payment methods do you accept?" 
-            answer="We accept all major credit cards including Visa, Mastercard, American Express, and Discover. We also accept PayPal, cryptocurrencies (Bitcoin, Ethereum, USDT), and various regional payment methods. All payments are processed through secure, encrypted gateways with SSL technology."
+            question="What payment methods does Zenora IPTV accept?" 
+            answer="Zenora IPTV accepts all major credit cards including Visa, Mastercard, American Express, and Discover. We also accept PayPal, cryptocurrencies (Bitcoin, Ethereum, USDT), and various regional payment methods. All payments are processed through secure, encrypted gateways with SSL technology."
           />
           <FAQItem 
-            question="Can I upgrade or downgrade my plan?" 
-            answer="Yes, you can upgrade or downgrade your plan at any time. If you upgrade, you'll only pay the price difference. If you downgrade, the credit will be applied to your next billing cycle. Simply contact our support team and they will assist you with the plan change immediately."
+            question="Can I upgrade or downgrade my Zenora IPTV plan?" 
+            answer="Yes, you can upgrade or downgrade your Zenora IPTV plan at any time. If you upgrade, you'll only pay the price difference. If you downgrade, the credit will be applied to your next billing cycle. Simply contact our support team and they will assist you with the plan change immediately."
           />
           <FAQItem 
-            question="Is there a contract or long-term commitment?" 
-            answer="No, there are no contracts or long-term commitments with our service. All plans are prepaid and you can cancel at any time without penalties or hidden fees. You only pay for the duration you choose."
+            question="Is there a contract or long-term commitment with Zenora IPTV?" 
+            answer="No, there are no contracts or long-term commitments with Zenora IPTV. All plans are prepaid and you can cancel at any time without penalties or hidden fees. You only pay for the duration you choose."
           />
           <FAQItem 
-            question="What happens after my subscription expires?" 
+            question="What happens after my Zenora IPTV subscription expires?" 
             answer="Before your subscription expires, you'll receive email reminders. You can easily renew through your account dashboard or by contacting support. If you don't renew, your access will be suspended but your account data will be preserved for 30 days."
           />
           <FAQItem 
-            question="Do you offer refunds if I'm not satisfied?" 
-            answer="Yes, we offer a 7-day money-back guarantee on all plans. If you're not completely satisfied with our streaming quality, channel selection, or customer service, simply contact our support team within 7 days of your purchase for a full refund. No questions asked."
+            question="Does Zenora IPTV offer refunds if I'm not satisfied?" 
+            answer="Yes, Zenora IPTV offers a 7-day money-back guarantee on all plans. If you're not completely satisfied with our streaming quality, channel selection, or customer service, simply contact our support team within 7 days of your purchase for a full refund. No questions asked."
           />
           <FAQItem 
-            question="Can I use one subscription on multiple devices?" 
-            answer="Yes, depending on your plan. The Starter plan supports 1 device simultaneously, the Value plan supports 2 devices, and the Ultimate plan supports 3 devices simultaneously. You can install the app on unlimited devices but simultaneous streams are limited to your plan's allowance."
+            question="Can I use one Zenora IPTV subscription on multiple devices?" 
+            answer="Yes, depending on your Zenora IPTV plan. The Starter plan supports 1 device simultaneously, the Value plan supports 2 devices, and the Ultimate plan supports 3 devices simultaneously. You can install the app on unlimited devices but simultaneous streams are limited to your plan's allowance."
           />
           <FAQItem 
-            question="Do you offer yearly discounts or special promotions?" 
+            question="Does Zenora IPTV offer yearly discounts or special promotions?" 
             answer="Yes, our 12-month Ultimate plan offers the best value with savings of up to 40% compared to monthly plans. We also run seasonal promotions and special discounts for long-term subscribers. Follow our social media channels for current offers."
           />
         </FadeInStagger>
@@ -302,7 +302,7 @@ export default function PricingPage() {
               Ready to Start Streaming?
             </h2>
             <p className="text-white/60 text-lg mb-8 max-w-2xl mx-auto">
-              Join over 20,000 satisfied customers enjoying premium IPTV entertainment.
+              Join over 20,000 satisfied customers enjoying premium IPTV entertainment with {CONSTANTS.FOCUS_KEYWORD}.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

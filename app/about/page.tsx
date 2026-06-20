@@ -37,7 +37,7 @@ export default function AboutPage() {
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 font-bold text-sm uppercase tracking-wider">Our Story</span>
           </div>
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-black text-white uppercase tracking-tight mb-6">
-            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Zenora IPTV</span>
+            About <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">{CONSTANTS.BRAND_NAME}</span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
             Discover the story behind the world's leading premium IPTV service provider.
@@ -76,7 +76,7 @@ export default function AboutPage() {
             </div>
             <div>
               <p className="text-white/80 text-base leading-relaxed">
-                Welcome to <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Zenora IPTV</strong>, the world's leading provider of premium <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Zenora IPTV</strong> services. 
+                Welcome to <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">{CONSTANTS.BRAND_NAME}</strong>, the world's leading provider of premium IPTV services. 
                 We built our platform with a single goal in mind: to revolutionize the way you experience television.
               </p>
             </div>
@@ -93,7 +93,7 @@ export default function AboutPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">Who We Are</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            Zenora IPTV was founded by a team of streaming technology enthusiasts who recognized the need for a reliable, 
+            {CONSTANTS.BRAND_NAME} was founded by a team of streaming technology enthusiasts who recognized the need for a reliable, 
             high-quality IPTV service. Traditional cable TV was expensive, inflexible, and offered limited content. Streaming services 
             were fragmented, requiring multiple subscriptions. We set out to create a better solution.
           </p>
@@ -121,7 +121,7 @@ export default function AboutPage() {
           <p className="text-white/70 leading-relaxed mb-6">
             Our infrastructure is powered by global CDN networks, ensuring that every stream is delivered to your device with 
             minimal latency and absolute reliability. Whether you are invested in live sports, blockbuster movies, or binge-worthy series, 
-            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600"> Zenora IPTV</strong> has you covered.
+            <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600"> {CONSTANTS.BRAND_NAME}</strong> has you covered.
           </p>
 
           <div className="bg-white/5 border border-white/10 rounded-2xl p-6 my-6">
@@ -198,7 +198,7 @@ export default function AboutPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">Join Our Community</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            Thousands of satisfied customers have already made the switch to <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Zenora IPTV</strong>. 
+            Thousands of satisfied customers have already made the switch to <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">{CONSTANTS.BRAND_NAME}</strong>. 
             Join our growing community and experience television the way it was meant to be - unlimited, affordable, and high-quality.
           </p>
         </div>
@@ -208,7 +208,7 @@ export default function AboutPage() {
           <div className="bg-gradient-to-r from-pink-500/10 via-purple-600/10 to-blue-600/10 border border-purple-600/20 rounded-2xl p-8">
             <h3 className="text-2xl font-bold text-white mb-3">Ready to Experience the Best IPTV Service?</h3>
             <p className="text-white/60 text-sm mb-6">
-              Join over 20,000 satisfied customers enjoying premium entertainment with Zenora IPTV
+              Join over 20,000 satisfied customers enjoying premium entertainment with {CONSTANTS.BRAND_NAME}
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link 

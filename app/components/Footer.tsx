@@ -5,22 +5,24 @@ import { Facebook, Instagram, Twitter } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="relative bg-slate-950 text-white/70 py-16 px-6 lg:px-12 border-t border-white/10 overflow-hidden">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pink-500/50 via-purple-600/50 to-transparent" />
+    <footer className="relative bg-slate-950 text-white/70 py-16 px-6 lg:px-12 border-t border-white/10 overflow-hidden min-h-[380px]">
+      {/* Decorative line - Updated to Pink/Purple/Blue */}
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-pink-500/50 to-transparent" />
 
       <div className="relative z-10 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
+          
           {/* Brand Section */}
           <div className="md:col-span-2">
             <Link
               href="/"
               className="flex items-center gap-3 mb-5 group inline-flex"
+              aria-label={`${CONSTANTS.BRAND_NAME} - Home`}
             >
-              {/* Full Logo Image (vertical - icon + text combined) */}
               <div className="w-auto h-12 flex items-center group-hover:scale-105 transition-transform">
                 <Image
                   src="/img/iptv-logo.webp"
-                  alt="Zenora IPTV"
+                  alt={CONSTANTS.BRAND_NAME}
                   width={180}
                   height={48}
                   className="object-contain h-full w-auto"
@@ -31,174 +33,92 @@ export default function Footer() {
 
             <p className="text-sm text-white/50 max-w-md leading-relaxed mb-6">
               Experience the future of entertainment with{" "}
-              Zenora IPTV. Delivering premium 4K streaming
-              worldwide with 15,000+ channels and 60,000+ VODs.
+              <strong className="text-pink-500/80">{CONSTANTS.FOCUS_KEYWORD}</strong>. 
+              Delivering premium 4K streaming worldwide with 15,000+ channels and 60,000+ VODs. 
+              Trusted by thousands of subscribers for reliable, high-quality IPTV service.
             </p>
 
-            {/* Social Icons */}
+            {/* Social Icons - Updated to Pink */}
             <div className="flex items-center gap-3">
               <a
                 href="#"
-                aria-label="Twitter"
-                className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 hover:border-pink-500 transition-all duration-300"
+                aria-label={`Follow ${CONSTANTS.FOCUS_KEYWORD} on Twitter`}
+                className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-pink-500 hover:border-pink-500 transition-all duration-300"
               >
                 <Twitter className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
               </a>
 
               <a
                 href="#"
-                aria-label="Instagram"
-                className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 hover:border-pink-500 transition-all duration-300"
+                aria-label={`Follow ${CONSTANTS.FOCUS_KEYWORD} on Instagram`}
+                className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-purple-600 hover:border-purple-600 transition-all duration-300"
               >
                 <Instagram className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
               </a>
 
               <a
                 href="#"
-                aria-label="Facebook"
-                className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 hover:border-pink-500 transition-all duration-300"
+                aria-label={`Follow ${CONSTANTS.FOCUS_KEYWORD} on Facebook`}
+                className="group w-10 h-10 rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center hover:bg-blue-600 hover:border-blue-600 transition-all duration-300"
               >
                 <Facebook className="w-4 h-4 text-white/50 group-hover:text-white transition-colors" />
               </a>
             </div>
           </div>
 
-          {/* Pages */}
+          {/* Pages - Updated hover to Pink */}
           <div>
             <h4 className="text-white font-bold mb-5 tracking-wide uppercase text-sm">
               Pages
             </h4>
-
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link
-                  href="/"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Home
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/pricing"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Pricing
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/setup"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Setup Guide
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/blog"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Blog
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/contact"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Contact
-                </Link>
-              </li>
+              <li><Link href="/" className="text-white/50 hover:text-pink-500 transition-colors">Home</Link></li>
+              <li><Link href="/pricing" className="text-white/50 hover:text-pink-500 transition-colors">Pricing</Link></li>
+              <li><Link href="/setup" className="text-white/50 hover:text-pink-500 transition-colors">Setup Guide</Link></li>
+              <li><Link href="/blog" className="text-white/50 hover:text-pink-500 transition-colors">Blog</Link></li>
+              <li><Link href="/contact" className="text-white/50 hover:text-pink-500 transition-colors">Contact</Link></li>
             </ul>
           </div>
 
-          {/* Legal */}
+          {/* Legal - Updated hover to Pink */}
           <div>
             <h4 className="text-white font-bold mb-5 tracking-wide uppercase text-sm">
               Legal
             </h4>
-
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link
-                  href="/terms"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Terms of Service
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/privacy"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Privacy Policy
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/about"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  About US
-                </Link>
-              </li>
-
-              <li>
-                <Link
-                  href="/refund-policy"
-                  className="text-white/50 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600 transition-colors"
-                >
-                  Refund Policy
-                </Link>
-              </li>
+              <li><Link href="/terms" className="text-white/50 hover:text-pink-500 transition-colors">Terms of Service</Link></li>
+              <li><Link href="/privacy" className="text-white/50 hover:text-pink-500 transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/about" className="text-white/50 hover:text-pink-500 transition-colors">About US</Link></li>
+              <li><Link href="/refund-policy" className="text-white/50 hover:text-pink-500 transition-colors">Refund Policy</Link></li>
             </ul>
           </div>
         </div>
       </div>
 
-      {/* Bottom Bar */}
+      {/* Bottom Bar - Payment methods updated hover to Pink */}
       <div className="max-w-7xl mx-auto mt-12 pt-6 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-xs text-white/40">
-          © {new Date().getFullYear()} Zenora IPTV. All rights
-          reserved.
+          © {new Date().getFullYear()} {CONSTANTS.BRAND_NAME}. All rights reserved.
         </p>
 
-        {/* Payment Methods */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           {[
-            { src: "/img/payment/1.png", alt: "PayPal" },
-            { src: "/img/payment/2.png", alt: "Bitcoin" },
-            { src: "/img/payment/3.png", alt: "Visa" },
-            { src: "/img/payment/4.png", alt: "Mastercard" },
+            { src: "/img/payment/1.png", alt: "PayPal", width: 45, height: 30 },
+            { src: "/img/payment/2.png", alt: "Bitcoin", width: 45, height: 30 },
+            { src: "/img/payment/3.png", alt: "Visa", width: 45, height: 30 },
+            { src: "/img/payment/4.png", alt: "Mastercard", width: 45, height: 30 },
           ].map((item) => (
             <div
               key={item.alt}
-              className="
-                h-9 w-14
-                rounded-lg
-                border border-white/10
-                bg-white/[0.03]
-                backdrop-blur-sm
-                flex items-center justify-center
-                hover:border-pink-500/40
-                hover:bg-pink-500/5
-                transition-all duration-300
-              "
+              className="relative h-9 w-14 flex-shrink-0 rounded-lg border border-white/10 bg-white/[0.03] backdrop-blur-sm flex items-center justify-center hover:border-pink-500/40 hover:bg-pink-500/5 transition-all duration-300"
             >
               <Image
                 src={item.src}
                 alt={item.alt}
-                width={45}
-                height={30}
+                fill
                 className="object-contain opacity-90 hover:opacity-100 transition-opacity"
+                loading="lazy"
+                sizes="56px"
               />
             </div>
           ))}

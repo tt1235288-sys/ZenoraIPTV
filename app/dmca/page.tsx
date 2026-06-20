@@ -20,7 +20,7 @@ export default function DMCAPage() {
             DMCA <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Policy</span>
           </h1>
           <p className="text-xl text-white/60 max-w-2xl mx-auto">
-            Zenora IPTV respects intellectual property rights and complies with the Digital Millennium Copyright Act.
+            {CONSTANTS.BRAND_NAME} respects intellectual property rights and complies with the Digital Millennium Copyright Act.
           </p>
         </div>
       </section>
@@ -38,7 +38,7 @@ export default function DMCAPage() {
             </div>
             <div>
               <p className="text-white/80 text-sm leading-relaxed">
-                <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Important Notice:</strong> Zenora IPTV does not host, store, upload, or distribute any video content. 
+                <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Important Notice:</strong> {CONSTANTS.BRAND_NAME} does not host, store, upload, or distribute any video content. 
                 Our service provides a directory of streams that are publicly available on the internet.
               </p>
             </div>
@@ -48,14 +48,14 @@ export default function DMCAPage() {
         <div className="prose prose-invert prose-purple max-w-none">
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">1. Our Commitment to Copyright Law</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            Zenora IPTV ("Zenora IPTV", "we", "us", or "our") is committed to complying with 
+            {CONSTANTS.BRAND_NAME} ("{CONSTANTS.BRAND_NAME}", "we", "us", or "our") is committed to complying with 
             the Digital Millennium Copyright Act (DMCA) and respecting the intellectual property rights of others. 
             We expect our users and service to do the same.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">2. What We Do Not Host</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            It is important to clarify that <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">Zenora IPTV</strong> does not host, 
+            It is important to clarify that <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600">{CONSTANTS.BRAND_NAME}</strong> does not host, 
             store, upload, or distribute any video content, audio content, or media files on our own servers. 
             Our service acts as a search engine and directory that indexes and organizes links to streams that are 
             publicly available across the internet. We do not control, own, or modify any of the content accessed 
@@ -71,7 +71,7 @@ export default function DMCAPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">4. How to Submit a DMCA Notice</h2>
           <p className="text-white/70 leading-relaxed mb-4">
-            To file a DMCA notice with Zenora IPTV, please send an email to:
+            To file a DMCA notice with {CONSTANTS.BRAND_NAME}, please send an email to:
           </p>
           
           <div className="bg-slate-900/50 border border-white/10 rounded-2xl p-6 my-6 text-center">
@@ -140,7 +140,7 @@ export default function DMCAPage() {
 
           <h2 className="text-2xl md:text-3xl font-bold text-white mt-8 mb-4">6. Repeat Infringers</h2>
           <p className="text-white/70 leading-relaxed mb-6">
-            Zenora IPTV reserves the right to terminate, in appropriate circumstances, the accounts of 
+            {CONSTANTS.BRAND_NAME} reserves the right to terminate, in appropriate circumstances, the accounts of 
             users who are repeat infringers of intellectual property rights.
           </p>
 

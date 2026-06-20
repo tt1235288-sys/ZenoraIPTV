@@ -49,19 +49,19 @@ export default function GlobalServerMap() {
   if (!mounted) {
     return (
       <section className="relative w-full overflow-hidden bg-black py-16 sm:py-20 lg:py-28 border-y border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(236,72,153,0.12),_rgba(139,92,246,0.08),_transparent_45%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(236,72,153,0.12),_transparent_45%)]" />
         <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
           <div className="mx-auto mb-10 max-w-3xl text-center">
-            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-600/30 bg-purple-600/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-purple-600">
+            <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-pink-500">
               <Wifi className="h-4 w-4" />
               Worldwide IPTV Network
             </div>
-            <h2 className="text-3xl font-black uppercase leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+            <h3 className="text-3xl font-black uppercase leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
               Global Coverage In
               <span className="block bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent">
                 100+ Countries
               </span>
-            </h2>
+            </h3>
           </div>
           <div className="relative mx-auto w-full overflow-hidden rounded-3xl border border-pink-500/20 bg-white/[0.03] p-1 shadow-[0_0_80px_rgba(236,72,153,0.08)] backdrop-blur-xl sm:p-1 lg:rounded-[2.5rem] lg:p-3">
             <div className="relative h-[360px] w-full overflow-hidden rounded-2xl bg-slate-950/80 sm:h-[470px] lg:h-[560px] flex items-center justify-center">
@@ -74,46 +74,45 @@ export default function GlobalServerMap() {
   }
 
   return (
-    <section className="relative w-full overflow-hidden bg-black py-16 sm:py-20 lg:py-28 border-y border-white/10">
-      {/* Background */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(236,72,153,0.12),_rgba(139,92,246,0.08),_transparent_45%)]" />
+    <section className="relative w-full overflow-hidden bg-black py-16 sm:py-20 lg:py-28 border-y border-white/10" aria-label="Global server coverage map">
+      {/* Background - Updated to Pink/Purple/Blue */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(236,72,153,0.12),_transparent_45%)]" />
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,_black,_rgba(0,0,0,0.82),_black)]" />
       <div
         className="absolute inset-0 opacity-[0.08]"
         style={{
           backgroundImage:
-            'linear-gradient(to right, #ec4899 1px, transparent 1px), linear-gradient(to bottom, #8b5cf6 1px, transparent 1px)',
+            'linear-gradient(to right, #ec4899 1px, transparent 1px), linear-gradient(to bottom, #ec4899 1px, transparent 1px)',
           backgroundSize: '64px 64px',
         }}
       />
 
       <FadeIn className="relative z-10 mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
-        {/* Header */}
+        {/* Header - Updated to Pink */}
         <div className="mx-auto mb-10 max-w-3xl text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-purple-600/30 bg-purple-600/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-purple-600">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-4 py-2 text-xs font-black uppercase tracking-[0.22em] text-pink-500">
             <Wifi className="h-4 w-4" />
             Worldwide IPTV Network
           </div>
 
-          <h2 className="text-3xl font-black uppercase leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
+          <h3 className="text-3xl font-black uppercase leading-tight tracking-tight text-white sm:text-4xl md:text-5xl lg:text-6xl">
             Global Coverage In
             <span className="block bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-clip-text text-transparent">
               100+ Countries
             </span>
-          </h2>
+          </h3>
 
           <p className="mx-auto mt-5 max-w-2xl text-sm leading-relaxed text-white/55 sm:text-base md:text-lg">
-            Enjoy stable IPTV streaming with premium worldwide servers built for live TV,
+            Enjoy stable Zenora IPTV streaming with premium worldwide servers built for live TV,
             movies, sports, and series without buffering.
           </p>
         </div>
 
-        {/* Map Card */}
-        <div className="relative mx-auto w-full overflow-hidden rounded-3xl border border-purple-600/20 bg-white/[0.03] p-1 shadow-[0_0_80px_rgba(139,92,246,0.08)] backdrop-blur-xl sm:p-1 lg:rounded-[2.5rem] lg:p-3">
+        {/* Map Card - Updated to Pink */}
+        <div className="relative mx-auto w-full overflow-hidden rounded-3xl border border-pink-500/20 bg-white/[0.03] p-1 shadow-[0_0_80px_rgba(236,72,153,0.08)] backdrop-blur-xl sm:p-1 lg:rounded-[2.5rem] lg:p-3">
           <div className="absolute -left-20 top-10 h-48 w-48 rounded-full bg-pink-500/10 blur-[80px]" />
-          <div className="absolute -right-20 bottom-10 h-48 w-48 rounded-full bg-blue-600/10 blur-[80px]" />
+          <div className="absolute -right-20 bottom-10 h-48 w-48 rounded-full bg-purple-600/10 blur-[80px]" />
 
-          {/* Fixed: Added suppressHydrationWarning */}
           <div className="relative h-[360px] w-full overflow-hidden rounded-2xl bg-slate-950/80 sm:h-[470px] lg:h-[560px]" suppressHydrationWarning>
             <ComposableMap
               projection="geoEqualEarth"
@@ -141,8 +140,8 @@ export default function GlobalServerMap() {
 
                 <linearGradient id="lineGold" x1="0%" y1="0%" x2="100%" y2="0%">
                   <stop offset="0%" stopColor="#ec4899" stopOpacity="0" />
-                  <stop offset="45%" stopColor="#8b5cf6" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="#2563eb" stopOpacity="0.15" />
+                  <stop offset="45%" stopColor="#ec4899" stopOpacity="0.9" />
+                  <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.15" />
                 </linearGradient>
               </defs>
 
@@ -161,9 +160,9 @@ export default function GlobalServerMap() {
                       style={{
                         default: { outline: 'none' },
                         hover: {
-                          fill: '#8b5cf6',
+                          fill: '#ec4899',
                           fillOpacity: 0.22,
-                          stroke: '#8b5cf6',
+                          stroke: '#ec4899',
                           strokeWidth: 0.7,
                           outline: 'none',
                         },
@@ -174,7 +173,7 @@ export default function GlobalServerMap() {
                 }
               </Geographies>
 
-              {/* Animated connection lines - Added suppressHydrationWarning */}
+              {/* Animated connection lines */}
               {serverMarkers.map((marker, idx) => (
                 <Line
                   key={`line-${marker.name}`}
@@ -193,16 +192,16 @@ export default function GlobalServerMap() {
                 />
               ))}
 
-              {/* Main hub */}
+              {/* Main hub - Updated to Pink */}
               <Marker coordinates={hub}>
-                <circle r={14} fill="#8b5cf6" fillOpacity={0.12}>
+                <circle r={14} fill="#ec4899" fillOpacity={0.12}>
                   <animate attributeName="r" values="8;22;8" dur="2.5s" repeatCount="indefinite" />
                   <animate attributeName="fillOpacity" values="0.25;0;0.25" dur="2.5s" repeatCount="indefinite" />
                 </circle>
-                <circle r={5} fill="#8b5cf6" stroke="#e9d5ff" strokeWidth={1} filter="url(#goldGlow)" />
+                <circle r={5} fill="#ec4899" stroke="#fbcfe8" strokeWidth={1} filter="url(#goldGlow)" />
               </Marker>
 
-              {/* Server points */}
+              {/* Server points - Updated to Pink */}
               {serverMarkers.map((marker, idx) => (
                 <Marker key={marker.name} coordinates={marker.coordinates}>
                   <g
@@ -235,7 +234,7 @@ export default function GlobalServerMap() {
 
                     <circle
                       r={3.2}
-                      fill="#8b5cf6"
+                      fill="#ec4899"
                       stroke="#020617"
                       strokeWidth={1}
                       filter="url(#goldGlow)"
@@ -267,7 +266,7 @@ export default function GlobalServerMap() {
                           height="26"
                           rx="13"
                           fill="#020617"
-                          stroke="#8b5cf6"
+                          stroke="#ec4899"
                           strokeOpacity="0.45"
                         />
                         <text
@@ -302,10 +301,10 @@ export default function GlobalServerMap() {
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-black to-transparent" />
           </div>
 
-          {/* Hover country */}
+          {/* Hover country - Updated to Pink */}
           <div className="mt-5 flex min-h-[40px] justify-center">
             {(hoveredCountry || hoveredMarker) && (
-              <div className="inline-flex items-center gap-2 rounded-full border border-purple-600/30 bg-purple-600/10 px-5 py-2 text-sm font-bold uppercase tracking-wide text-purple-600 backdrop-blur-sm">
+              <div className="inline-flex items-center gap-2 rounded-full border border-pink-500/30 bg-pink-500/10 px-5 py-2 text-sm font-bold uppercase tracking-wide text-pink-500 backdrop-blur-sm">
                 <MapPin className="h-4 w-4" />
                 {hoveredMarker || hoveredCountry}
               </div>

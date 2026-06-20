@@ -1,11 +1,9 @@
-// app/layout.tsx
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import Script from 'next/script';
 import { Poppins, Montserrat } from 'next/font/google';
 import './globals.css';
 import Header from './components/Header';
-import FloatingWhatsApp from './components/FloatingWhatsApp'; // ADD THIS IMPORT
-
+import FloatingWhatsApp from './components/FloatingWhatsApp';
 import Footer from './components/Footer';
 import { CONSTANTS } from '@/lib/seo';
 
@@ -27,13 +25,13 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${CONSTANTS.DOMAIN}`),
   title: {
-    default: `Zenora IPTV - Best Premium IPTV Subscription Service 2026 | 15,000+ Channels & 4K Streaming`,
-    template: `%s | Zenora IPTV`,
+    default: `${CONSTANTS.FOCUS_KEYWORD} - #1 Premium IPTV Service Provider 2026 | Official Website`,
+    template: `%s | ${CONSTANTS.BRAND_NAME}`,
   },
-  description: `Experience Zenora IPTV: Stream 15,000+ Live Channels & 60,000+ VODs in Crystal Clear 4K quality. Fast activation, Anti-Freeze Technology, and 24/7 Pro Support.`,
-  authors: [{ name: `Zenora IPTV Team` }],
-  creator: `Zenora IPTV`,
-  publisher: `Zenora IPTV`,
+  description: `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
+  authors: [{ name: `${CONSTANTS.BRAND_NAME} Team` }],
+  creator: CONSTANTS.BRAND_NAME,
+  publisher: CONSTANTS.BRAND_NAME,
   formatDetection: {
     email: false,
     address: false,
@@ -54,35 +52,76 @@ export const metadata: Metadata = {
     canonical: `https://${CONSTANTS.DOMAIN}/`,
   },
   openGraph: {
-    title: `Zenora IPTV - Best Premium IPTV Subscription Service 2026`,
-    description: `Stream 15,000+ Live Channels & 60,000+ VODs in 4K quality. Instant activation, anti-freeze technology, 24/7 support.`,
+    title: `${CONSTANTS.FOCUS_KEYWORD} - #1 Premium IPTV Service Provider 2026 | Official Website`,
+    description: `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
     url: `https://${CONSTANTS.DOMAIN}/`,
-    siteName: `Zenora IPTV`,
+    siteName: CONSTANTS.BRAND_NAME,
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
+        url: `https://${CONSTANTS.DOMAIN}/img/structer.png`,
         width: 1200,
         height: 630,
-        alt: `Zenora IPTV - Premium IPTV Service`,
+        alt: `${CONSTANTS.FOCUS_KEYWORD} - Premium IPTV Service Provider`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Zenora IPTV - Best Premium IPTV Subscription Service 2026`,
-    description: `15,000+ channels, 60,000+ VODs, 4K quality. Instant activation.`,
-    images: [`https://${CONSTANTS.DOMAIN}/img/logo.webp`],
-    creator: `@zenoraiptv`,
-    site: `@zenoraiptv`,
+    title: `${CONSTANTS.FOCUS_KEYWORD} - #1 Premium IPTV Service Provider 2026`,
+    description: `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
+    images: [`https://${CONSTANTS.DOMAIN}/img/structer.png`],
+    creator: `@${CONSTANTS.BRAND_NAME}`,
+    site: `@${CONSTANTS.BRAND_NAME}`,
+  },
+  icons: {
+    icon: [
+      { url: '/img/favicons/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/img/favicons/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/img/favicons/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/img/favicons/favicon-64x64.png', sizes: '64x64', type: 'image/png' },
+      { url: '/img/favicons/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/img/favicons/favicon-128x128.png', sizes: '128x128', type: 'image/png' },
+      { url: '/img/favicons/favicon-256x256.png', sizes: '256x256', type: 'image/png' },
+      { url: '/img/favicons/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/img/favicons/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    shortcut: '/img/favicons/favicon.ico',
+    apple: [
+      { url: '/img/favicons/apple-touch-icon-57x57.png', sizes: '57x57', type: 'image/png' },
+      { url: '/img/favicons/apple-touch-icon-72x72.png', sizes: '72x72', type: 'image/png' },
+      { url: '/img/favicons/apple-touch-icon-114x114.png', sizes: '114x114', type: 'image/png' },
+      { url: '/img/favicons/apple-touch-icon-120x120.png', sizes: '120x120', type: 'image/png' },
+      { url: '/img/favicons/apple-touch-icon-144x144.png', sizes: '144x144', type: 'image/png' },
+      { url: '/img/favicons/apple-touch-icon-152x152.png', sizes: '152x152', type: 'image/png' },
+      { url: '/img/favicons/apple-touch-icon-180x180.png', sizes: '180x180', type: 'image/png' },
+    ],
+    other: [
+      {
+        rel: 'mask-icon',
+        url: '/img/favicons/safari-pinned-tab.svg',
+        color: '#ec4899',
+      },
+    ],
+  },
+  manifest: '/img/favicons/site.webmanifest',
+  appleWebApp: {
+    capable: true,
+    title: CONSTANTS.BRAND_NAME,
+    statusBarStyle: 'black-translucent',
+  },
+  other: {
+    'msapplication-TileColor': '#0f172a',
+    'msapplication-TileImage': '/img/favicons/mstile-144x144.png',
+    'msapplication-config': '/img/favicons/browserconfig.xml',
   },
   verification: {
-    google: '',
+    google: 'G-6NR51QZXKL',
   },
   category: 'entertainment',
   keywords: [
-    'Zenora IPTV',
+    CONSTANTS.FOCUS_KEYWORD,
     'IPTV service',
     'best IPTV provider',
     '4K streaming',
@@ -91,7 +130,6 @@ export const metadata: Metadata = {
     'IPTV subscription',
     'premium IPTV',
     'international channels',
-    'Zenora IPTV',
     'IPTV 2026',
     'streaming service',
     'cord cutting',
@@ -100,7 +138,14 @@ export const metadata: Metadata = {
   ],
 };
 
-// Organization Schema for Zenora IPTV
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0f172a',
+};
+
+// Organization Schema
 const OrganizationSchema = () => (
   <script
     type="application/ld+json"
@@ -110,12 +155,12 @@ const OrganizationSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Zenora IPTV",
-        "alternateName": "Zenora IPTV",
+        "name": CONSTANTS.BRAND_NAME,
+        "alternateName": CONSTANTS.FOCUS_KEYWORD,
         "url": `https://${CONSTANTS.DOMAIN}`,
-        "logo": `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
-        "image": `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
-        "description": `Premium IPTV subscription service with 15,000+ live channels and 60,000+ VODs in 4K quality.`,
+        "logo": `https://${CONSTANTS.DOMAIN}/img/structer.png`,
+        "image": `https://${CONSTANTS.DOMAIN}/img/structer.png`,
+        "description": `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer support",
@@ -143,9 +188,10 @@ const WebsiteSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Zenora IPTV",
+        "name": CONSTANTS.BRAND_NAME,
+        "alternateName": CONSTANTS.FOCUS_KEYWORD,
         "url": `https://${CONSTANTS.DOMAIN}`,
-        "description": `Premium IPTV subscription service with Zenora IPTV`,
+        "description": `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
         "potentialAction": {
           "@type": "SearchAction",
           "target": `https://${CONSTANTS.DOMAIN}/search?q={search_term_string}`,
@@ -156,7 +202,7 @@ const WebsiteSchema = () => (
   />
 );
 
-// Product Schema for Subscription Plans
+// Product Schema
 const ProductSchema = () => (
   <script
     type="application/ld+json"
@@ -166,13 +212,12 @@ const ProductSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": `Zenora IPTV Premium Subscription`,
-        "logo": `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
-        "image": `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
-        "description": `Premium IPTV service with 15,000+ live channels, 60,000+ VODs, and 4K streaming quality.`,
+        "name": `${CONSTANTS.BRAND_NAME} Premium Subscription`,
+        "image": `https://${CONSTANTS.DOMAIN}/img/structer.png`,
+        "description": `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
         "brand": { 
           "@type": "Brand", 
-          "name": "Zenora IPTV" 
+          "name": CONSTANTS.BRAND_NAME 
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -279,13 +324,14 @@ const ServiceSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Service",
-        "name": `Zenora IPTV IPTV Subscription`,
+        "name": `${CONSTANTS.BRAND_NAME} IPTV Subscription`,
+        "alternateName": CONSTANTS.FOCUS_KEYWORD,
         "serviceType": "IPTV Subscription",
         "provider": {
           "@type": "Organization",
-          "name": "Zenora IPTV"
+          "name": CONSTANTS.BRAND_NAME
         },
-        "description": "Premium IPTV service with 15,000+ live channels, 60,000+ VODs, and 4K streaming quality.",
+        "description": `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today. Start your free trial risk-free!`,
         "areaServed": "Worldwide",
         "hasOfferCatalog": {
           "@type": "OfferCatalog",
@@ -379,81 +425,183 @@ const ServiceSchema = () => (
   />
 );
 
+// FAQ Schema - Updated with Zenora IPTV and all 6 keywords
+const FAQSchema = () => (
+  <script
+    type="application/ld+json"
+    id="faq-schema"
+    suppressHydrationWarning
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Zenora IPTV and how does it work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zenora IPTV is a cutting-edge IPTV subscription service that delivers over 15,000 live channels and 60,000+ on-demand movies and series in stunning 4K quality with anti-freeze technology and 24/7 customer support."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are IPTV services legal with Zenora IPTV?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zenora IPTV operates as a legal IPTV service provider offering licensed content to customers worldwide. We recommend checking your local regulations regarding IPTV usage in your specific region."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I activate Zenora IPTV on my Firestick device?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Activating Zenora IPTV on Firestick is simple: Download the IPTV player app from the Amazon App Store, enter your subscription credentials, and start streaming immediately with our easy setup guide."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I watch local channels with Zenora IPTV?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Zenora IPTV provides access to local channels from over 100 countries worldwide. Simply select your region from the channel list to find your local networks and regional programming."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I stream Zenora IPTV on my laptop or computer?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, Zenora IPTV is fully compatible with Windows PC and Mac laptops. Simply install the recommended IPTV player application, log in, and start watching your favorite channels instantly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do I install IPTV Smarters Pro on Firestick for Zenora IPTV?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "To install IPTV Smarters Pro on Firestick: Go to the Amazon App Store, search for 'IPTV Smarters Pro', download and install the app, then enter your Zenora IPTV subscription credentials to start streaming."
+            }
+          }
+        ]
+      })
+    }}
+  />
+);
+
+// WebPage Schema with primaryImageOfPage for better image display in search results
+const WebPageSchema = () => (
+  <script
+    type="application/ld+json"
+    id="webpage-schema"
+    suppressHydrationWarning
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": `${CONSTANTS.FOCUS_KEYWORD} - #1 Premium IPTV Service Provider 2026`,
+        "description": `Experience Zenora IPTV: 15,000+ Live Channels, 60,000+ VODs, and crystal-clear 4K streaming with anti-freeze technology. Fast activation, 24/7 support, and the best IPTV subscription value available today.`,
+        "url": `https://${CONSTANTS.DOMAIN}/`,
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": `https://${CONSTANTS.DOMAIN}/img/structer.png`,
+          "width": "1200",
+          "height": "630"
+        }
+      })
+    }}
+  />
+);
+
+// Article Schema for better image display in search
+const ArticleSchema = () => (
+  <script
+    type="application/ld+json"
+    id="article-schema"
+    suppressHydrationWarning
+    dangerouslySetInnerHTML={{
+      __html: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": `${CONSTANTS.FOCUS_KEYWORD} - #1 Premium IPTV Service Provider 2026 | 4K Streaming`,
+        "image": [
+          `https://${CONSTANTS.DOMAIN}/img/structer.png`
+        ],
+        "datePublished": "2026-01-01T00:00:00+00:00",
+        "dateModified": new Date().toISOString(),
+        "author": {
+          "@type": "Person",
+          "name": `${CONSTANTS.BRAND_NAME} Team`
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": CONSTANTS.BRAND_NAME,
+          "logo": {
+            "@type": "ImageObject",
+            "url": `https://${CONSTANTS.DOMAIN}/img/structer.png`
+          }
+        }
+      })
+    }}
+  />
+);
+
+// Google Analytics Script Component
+const GoogleAnalyticsScript = () => (
+  <>
+    <Script
+      strategy="afterInteractive"
+      src={`https://www.googletagmanager.com/gtag/js?id=G-6NR51QZXKL`}
+    />
+    <Script
+      id="google-analytics"
+      strategy="afterInteractive"
+      dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-6NR51QZXKL');
+        `,
+      }}
+    />
+  </>
+);
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html>
+    <html lang="en" className="dark scroll-smooth">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="theme-color" content="#0f172a" />
-        <meta name="thumbnail" content={`https://${CONSTANTS.DOMAIN}/img/logo.webp`} />
-        
-        {/* Favicon Links - ADD THESE */}
-        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="48x48" href="/img/favicons/favicon-48x48.png" />
-        <link rel="icon" type="image/png" sizes="64x64" href="/img/favicons/favicon-64x64.png" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/favicon-96x96.png" />
-        <link rel="icon" type="image/png" sizes="128x128" href="/img/favicons/favicon-128x128.png" />
-        <link rel="icon" type="image/png" sizes="256x256" href="/img/favicons/favicon-256x256.png" />
-        <link rel="icon" type="image/x-icon" href="/img/favicons/favicon.ico" />
-        
-        {/* Apple Touch Icons */}
-        <link rel="apple-touch-icon" sizes="57x57" href="/img/favicons/apple-touch-icon-57x57.png" />
-        <link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-touch-icon-72x72.png" />
-        <link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-touch-icon-114x114.png" />
-        <link rel="apple-touch-icon" sizes="120x120" href="/img/favicons/apple-touch-icon-120x120.png" />
-        <link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-touch-icon-144x144.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="/img/favicons/apple-touch-icon-152x152.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon-180x180.png" />
-        
-        {/* Android Chrome Icons */}
-        <link rel="icon" type="image/png" sizes="48x48" href="/img/favicons/android-chrome-48x48.png" />
-        <link rel="icon" type="image/png" sizes="72x72" href="/img/favicons/android-chrome-72x72.png" />
-        <link rel="icon" type="image/png" sizes="96x96" href="/img/favicons/android-chrome-96x96.png" />
-        <link rel="icon" type="image/png" sizes="144x144" href="/img/favicons/android-chrome-144x144.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/img/favicons/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="256x256" href="/img/favicons/android-chrome-256x256.png" />
-        <link rel="icon" type="image/png" sizes="384x384" href="/img/favicons/android-chrome-384x384.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/img/favicons/android-chrome-512x512.png" />
-        
-        {/* Safari Pinned Tab */}
-        <link rel="mask-icon" href="/img/favicons/safari-pinned-tab.svg" color="#ec4899" />
-        
-        {/* Manifest */}
-        <link rel="manifest" href="/img/favicons/site.webmanifest" />
+        <meta name="thumbnail" content={`https://${CONSTANTS.DOMAIN}/img/structer.png`} />
+        {/* SEO Focus Keywords */}
+        <meta name="keywords" content="Zenora IPTV, IPTV service, IPTV subscription, best IPTV, IPTV encoder, IPTV services, IPTV box, Free Trial" />
       </head>
       <body 
         className={`${poppins.className} ${montserrat.variable} antialiased min-h-screen bg-slate-950 text-white`} 
         suppressHydrationWarning
       >
+        {/* JSON-LD Schemas */}
         <OrganizationSchema />
         <WebsiteSchema />
         <ProductSchema />
         <ServiceSchema />
+        <FAQSchema />
+        <WebPageSchema />
+        <ArticleSchema />
 
         <Header />
         {children}
         <Footer />
 
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-6NR51QZXKL"
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-6NR51QZXKL');
-            `,
-          }}
-        />
+        {/* Google Analytics */}
+        <GoogleAnalyticsScript />
+        
         <FloatingWhatsApp />
       </body>
     </html>

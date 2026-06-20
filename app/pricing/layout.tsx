@@ -1,35 +1,18 @@
 // app/pricing/layout.tsx
 import type { Metadata } from 'next';
 import Script from 'next/script';
-import { Poppins, Montserrat } from 'next/font/google';
-import '../globals.css';
 import { CONSTANTS } from '@/lib/seo';
-
-const poppins = Poppins({
-  weight: ['300', '400', '500', '600', '700'],
-  subsets: ['latin'],
-  variable: '--font-poppins',
-  display: 'swap',
-});
-
-const montserrat = Montserrat({
-  weight: ['400', '500', '600', '700', '800', '900'],
-  style: ['normal', 'italic'],
-  subsets: ['latin'],
-  variable: '--font-montserrat',
-  display: 'swap',
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(`https://${CONSTANTS.DOMAIN}`),
   title: {
-    default: `Pricing & Plans | Zenora IPTV - Best IPTV Subscription 2025 | 15,000+ Channels & 4K Streaming`,
-    template: `%s | Zenora IPTV`,
+    default: `${CONSTANTS.FOCUS_KEYWORD} Pricing & Plans - Best IPTV Subscription 2026 | 15,000+ Channels & 4K Streaming`,
+    template: `%s | ${CONSTANTS.BRAND_NAME}`,
   },
-  description: `Choose your Zenora IPTV subscription plan starting at just $7.08/month. Get 15,000+ live channels, 60,000+ VODs, 4K streaming, PPV events, and 7-day money-back guarantee.`,
-  authors: [{ name: `Zenora IPTV Team` }],
-  creator: `Zenora IPTV`,
-  publisher: `Zenora IPTV`,
+  description: `Choose your ${CONSTANTS.FOCUS_KEYWORD} subscription plan starting at just $30 for 3 months. Get 15,000+ live channels, 60,000+ VODs, 4K streaming, PPV events, and a 7-day money-back guarantee.`,
+  authors: [{ name: `${CONSTANTS.BRAND_NAME} Team` }],
+  creator: CONSTANTS.BRAND_NAME,
+  publisher: CONSTANTS.BRAND_NAME,
   formatDetection: {
     email: false,
     address: false,
@@ -50,42 +33,41 @@ export const metadata: Metadata = {
     canonical: `https://${CONSTANTS.DOMAIN}/pricing`,
   },
   openGraph: {
-    title: `Zenora IPTV - Pricing & Subscription Plans`,
-    description: `Subscribe to Zenora IPTV starting at $7.08/month. Access 15,000+ live channels, 60,000+ VODs, and 4K streaming.`,
+    title: `${CONSTANTS.FOCUS_KEYWORD} - Pricing & Subscription Plans 2026`,
+    description: `Subscribe to ${CONSTANTS.FOCUS_KEYWORD} starting at $30 for 3 months. Access 15,000+ live channels, 60,000+ VODs, and 4K streaming with anti-freeze technology.`,
     url: `https://${CONSTANTS.DOMAIN}/pricing`,
-    siteName: `Zenora IPTV`,
+    siteName: CONSTANTS.BRAND_NAME,
     locale: 'en_US',
     type: 'website',
     images: [
       {
-        url: `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
+        url: `https://${CONSTANTS.DOMAIN}/img/structer.png`,
         width: 1200,
         height: 630,
-        alt: `Zenora IPTV Pricing Plans`,
+        alt: `${CONSTANTS.FOCUS_KEYWORD} Pricing Plans - Premium IPTV Subscription`,
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Zenora IPTV - Subscription Plans`,
-    description: `Starting at $30/3months. 15,000+ channels, 60,000+ VODs, 4K quality.`,
-    images: [`https://${CONSTANTS.DOMAIN}/img/logo.webp`],
-    creator: `@zenoraiptv`,
-    site: `@zenoraiptv`,
+    title: `${CONSTANTS.FOCUS_KEYWORD} - Subscription Plans 2026`,
+    description: `Starting at $30 for 3 months. 15,000+ channels, 60,000+ VODs, 4K quality, and anti-freeze technology.`,
+    images: [`https://${CONSTANTS.DOMAIN}/img/structer.png`],
+    creator: `@${CONSTANTS.BRAND_NAME}`,
+    site: `@${CONSTANTS.BRAND_NAME}`,
   },
   verification: {
     google: '',
   },
   category: 'entertainment',
   keywords: [
-    'Zenora IPTV pricing',
+    `${CONSTANTS.FOCUS_KEYWORD} pricing`,
     'IPTV subscription cost',
     'best IPTV price',
-    'Zenora IPTV plans',
+    `${CONSTANTS.FOCUS_KEYWORD} plans`,
     'cheap IPTV subscription',
     'IPTV 4K pricing',
     'sports IPTV package',
-    'Zenora IPTV',
     'IPTV service',
     'best IPTV provider',
     '4K streaming',
@@ -107,11 +89,11 @@ const PricingPageSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Product",
-        "name": `Zenora IPTV IPTV Subscription Plans`,
-        "description": `Premium IPTV service with subscription plans starting at $7.08/month. Access 15,000+ live channels and 60,000+ VODs in 4K quality.`,
+        "name": `${CONSTANTS.FOCUS_KEYWORD} IPTV Subscription Plans`,
+        "description": `Premium IPTV service with subscription plans starting at $30 for 3 months. Access 15,000+ live channels and 60,000+ VODs in 4K quality with anti-freeze technology.`,
         "brand": {
           "@type": "Brand",
-          "name": "Zenora IPTV"
+          "name": CONSTANTS.BRAND_NAME
         },
         "aggregateRating": {
           "@type": "AggregateRating",
@@ -159,7 +141,7 @@ const PricingPageSchema = () => (
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
             "url": `https://${CONSTANTS.DOMAIN}/pricing`,
-            "description": "6 months access to 18,000+ live channels and 80,000+ VODs"
+            "description": "6 months access to 15,000+ live channels and 60,000+ VODs"
           },
           {
             "@type": "Offer",
@@ -189,7 +171,7 @@ const PricingPageSchema = () => (
             "priceValidUntil": "2027-12-31",
             "availability": "https://schema.org/OnlineOnly",
             "url": `https://${CONSTANTS.DOMAIN}/pricing`,
-            "description": "12 months access to 25,000+ premium channels and 100,000+ VODs"
+            "description": "12 months access to 15,000+ premium channels and 60,000+ VODs"
           },
           {
             "@type": "Offer",
@@ -230,50 +212,66 @@ const PricingFAQSchema = () => (
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "What payment methods do you accept?",
+            "name": `What payment methods does ${CONSTANTS.FOCUS_KEYWORD} accept?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "We accept all major credit cards including Visa, Mastercard, American Express, and Discover. We also accept PayPal, cryptocurrencies (Bitcoin, Ethereum, USDT), and various regional payment methods."
+              "text": `${CONSTANTS.FOCUS_KEYWORD} accepts all major credit cards including Visa, Mastercard, American Express, and Discover. We also accept PayPal, cryptocurrencies (Bitcoin, Ethereum, USDT), and various regional payment methods.`
             }
           },
           {
             "@type": "Question",
-            "name": "Can I upgrade or downgrade my plan?",
+            "name": `Can I upgrade or downgrade my ${CONSTANTS.FOCUS_KEYWORD} plan?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, you can upgrade or downgrade your plan at any time. Contact our support team and they will assist you with the change immediately."
+              "text": `Yes, you can upgrade or downgrade your ${CONSTANTS.FOCUS_KEYWORD} plan at any time. Contact our support team and they will assist you immediately.`
             }
           },
           {
             "@type": "Question",
-            "name": "Is there a contract or long-term commitment?",
+            "name": `Is there a contract with ${CONSTANTS.FOCUS_KEYWORD}?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No, there are no contracts or long-term commitments. All plans are prepaid and you can cancel at any time without penalties or hidden fees."
+              "text": `No, there are no contracts or long-term commitments with ${CONSTANTS.FOCUS_KEYWORD}. All plans are prepaid and you can cancel at any time without penalties.`
             }
           },
           {
             "@type": "Question",
-            "name": "Do you offer refunds if I'm not satisfied?",
+            "name": `Does ${CONSTANTS.FOCUS_KEYWORD} offer a money-back guarantee?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, we offer a 7-day money-back guarantee on all plans. If you're not completely satisfied, contact our support team within 7 days for a full refund."
+              "text": `Yes, ${CONSTANTS.FOCUS_KEYWORD} offers a 7-day money-back guarantee on all plans. Contact our support team within 7 days for a full refund.`
             }
           },
           {
             "@type": "Question",
-            "name": "Can I use one subscription on multiple devices?",
+            "name": `Can I use ${CONSTANTS.FOCUS_KEYWORD} on multiple devices?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Yes, depending on your plan. Starter supports 1 device, Value supports 2 devices, and Ultimate supports 3 devices simultaneously."
+              "text": `Yes, depending on your ${CONSTANTS.FOCUS_KEYWORD} plan. Starter supports 1 device, Value supports 2 devices, and Ultimate supports 3 devices simultaneously.`
             }
           },
           {
             "@type": "Question",
-            "name": "What is the difference between the plans?",
+            "name": `What is the difference between ${CONSTANTS.FOCUS_KEYWORD} plans?`,
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "The Starter plan includes 15,000+ channels and 60,000+ VODs with 1 connection. The Value plan includes 18,000+ channels and 80,000+ VODs with 2 connections. The Ultimate plan includes 25,000+ premium channels and 100,000+ VODs with 3 connections plus VIP support and free VPN."
+              "text": `The ${CONSTANTS.FOCUS_KEYWORD} Starter plan includes 15,000+ channels and 60,000+ VODs with 1 connection. The Value plan includes the same content with 2 connections. The Ultimate plan includes all content with 3 connections plus VIP support.`
+            }
+          },
+          {
+            "@type": "Question",
+            "name": `Is ${CONSTANTS.FOCUS_KEYWORD} the best IPTV service provider?`,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": `Based on 5000+ reviews, ${CONSTANTS.FOCUS_KEYWORD} is rated 4.9/5 stars and is considered one of the best IPTV service providers with superior 4K streaming quality.`
+            }
+          },
+          {
+            "@type": "Question",
+            "name": `How quickly can I activate my ${CONSTANTS.FOCUS_KEYWORD} subscription?`,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": `${CONSTANTS.FOCUS_KEYWORD} subscriptions are activated instantly after payment confirmation. You will receive your login credentials via email within minutes.`
             }
           }
         ]
@@ -292,11 +290,11 @@ const OrganizationSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Zenora IPTV",
-        "alternateName": "Zenora IPTV",
+        "name": CONSTANTS.BRAND_NAME,
+        "alternateName": CONSTANTS.FOCUS_KEYWORD,
         "url": `https://${CONSTANTS.DOMAIN}`,
-        "logo": `https://${CONSTANTS.DOMAIN}/img/logo.webp`,
-        "description": `Premium IPTV service with subscription plans starting at $7.08/month.`,
+        "logo": `https://${CONSTANTS.DOMAIN}/img/structer.png`,
+        "description": `Premium IPTV service with subscription plans starting at $30 for 3 months.`,
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer support",
@@ -324,9 +322,9 @@ const WebsiteSchema = () => (
       __html: JSON.stringify({
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Zenora IPTV",
+        "name": CONSTANTS.BRAND_NAME,
         "url": `https://${CONSTANTS.DOMAIN}`,
-        "description": `Zenora IPTV - Best IPTV subscription plans starting at $7.08/month.`,
+        "description": `${CONSTANTS.FOCUS_KEYWORD} - Best IPTV subscription plans starting at $30 for 3 months.`,
         "potentialAction": {
           "@type": "SearchAction",
           "target": `https://${CONSTANTS.DOMAIN}/search?q={search_term_string}`,
@@ -337,53 +335,38 @@ const WebsiteSchema = () => (
   />
 );
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function PricingLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="theme-color" content="#0f172a" />
-        <meta name="thumbnail" content={`https://${CONSTANTS.DOMAIN}/img/logo.webp`} />
-        
-        {/* Favicons */}
-        <link rel="icon" type="image/png" sizes="16x16" href="/img/favicons/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/img/favicons/favicon-32x32.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/img/favicons/apple-touch-icon-180x180.png" />
-        <link rel="manifest" href="/img/favicons/site.webmanifest" />
-      </head>
-      <body 
-        className={`${poppins.className} ${montserrat.variable} antialiased min-h-screen bg-slate-950 text-white`} 
-        suppressHydrationWarning
-      >
-        {/* JSON-LD Schemas */}
-        <OrganizationSchema />
-        <WebsiteSchema />
-        <PricingPageSchema />
-        <PricingFAQSchema />
+    <>
+      {/* JSON-LD Schemas */}
+      <OrganizationSchema />
+      <WebsiteSchema />
+      <PricingPageSchema />
+      <PricingFAQSchema />
 
-        {children}
+      {children}
 
-        {/* Google Analytics */}
-        <Script
-          strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-6NR51QZXKL"
-        />
-        <Script
-          id="google-analytics"
-          strategy="afterInteractive"
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-6NR51QZXKL');
-            `,
-          }}
-        />
-      </body>
-    </html>
+      {/* Google Analytics */}
+      <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-6NR51QZXKL"
+      />
+      <Script
+        id="google-analytics"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-6NR51QZXKL');
+          `,
+        }}
+      />
+    </>
   );
 }

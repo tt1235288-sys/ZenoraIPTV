@@ -1,4 +1,5 @@
 'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X } from 'lucide-react';
@@ -19,17 +20,26 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Prevent body scroll when mobile menu is open
+  // ✅ Force state directly onto the body element to bypass JS event delays
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      document.body.classList.add('mobile-menu-open');
     } else {
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-open');
     }
+
     return () => {
       document.body.style.overflow = 'unset';
+      document.body.classList.remove('mobile-menu-open');
     };
   }, [isOpen]);
+
+  // Close menu when route changes
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -38,7 +48,6 @@ export default function Header() {
     { name: 'Blog', href: '/blog' },
   ];
 
-  // Check if link is active
   const isActive = (href: string) => {
     if (href === '/') {
       return pathname === href;
@@ -51,13 +60,13 @@ export default function Header() {
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/80 backdrop-blur-xl border-b border-white/10 py-2 shadow-2xl shadow-black/50' : 'bg-transparent py-4'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Logo - Full vertical logo image */}
+            {/* Logo */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center group">
                 <div className="h-10 flex items-center group-hover:scale-105 transition-transform">
                   <Image
                     src="/img/iptv-logo.webp"
-                    alt="Zenora IPTV"
+                    alt={CONSTANTS.BRAND_NAME}
                     width={160}
                     height={40}
                     className="object-contain h-full w-auto"
@@ -67,7 +76,7 @@ export default function Header() {
               </Link>
             </div>
             
-            <nav className="hidden md:block">
+            <nav className="hidden md:block" aria-label="Main navigation">
               <ul className="flex items-center gap-8 bg-black/20 backdrop-blur-md px-8 py-3 rounded-full border border-white/5">
                 {navLinks.map((link) => (
                   <li key={link.name}>
@@ -75,8 +84,8 @@ export default function Header() {
                       href={link.href} 
                       className={`font-bold uppercase tracking-widest text-sm transition-colors ${
                         isActive(link.href) 
-                          ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600' 
-                          : 'text-white/80 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600'
+                          ? 'text-pink-500' 
+                          : 'text-white/80 hover:text-pink-500'
                       }`}
                     >
                       {link.name}
@@ -93,7 +102,12 @@ export default function Header() {
             </div>
 
             <div className="md:hidden flex items-center">
-              <button onClick={() => setIsOpen(!isOpen)} className="text-white p-2 focus:outline-none z-50 relative">
+              <button 
+                onClick={() => setIsOpen(!isOpen)} 
+                className="text-white p-2 focus:outline-none z-50 relative"
+                aria-label={isOpen ? 'Close menu' : 'Open menu'}
+                aria-expanded={isOpen}
+              >
                 {isOpen ? <X className="w-7 h-7" /> : <Menu className="w-7 h-7" />}
               </button>
             </div>
@@ -107,6 +121,9 @@ export default function Header() {
           isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
         }`}
         style={{ top: 0, left: 0, right: 0, bottom: 0 }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Mobile navigation menu"
       >
         <div className="flex flex-col items-center justify-center h-full w-full px-6">
           <div className="space-y-4 w-full max-w-sm mx-auto">
@@ -117,8 +134,8 @@ export default function Header() {
                 onClick={() => setIsOpen(false)}
                 className={`block text-center px-6 py-5 rounded-2xl text-xl font-bold tracking-wider uppercase transition-all ${
                   isActive(link.href) 
-                    ? 'text-transparent bg-clip-text bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 bg-white/10' 
-                    : 'text-white bg-white/5 hover:bg-white/10 hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-pink-500 hover:via-purple-600 hover:to-blue-600'
+                    ? 'text-pink-500 bg-white/10' 
+                    : 'text-white bg-white/5 hover:bg-white/10 hover:text-pink-500'
                 }`}
               >
                 {link.name}
@@ -127,7 +144,7 @@ export default function Header() {
             <Link 
               href="/pricing"
               onClick={() => setIsOpen(false)}
-              className="block mt-8 text-center px-6 py-5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white font-black text-xl tracking-widest uppercase shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:shadow-[0_0_40px_rgba(139,92,246,0.6)] transition-shadow"
+              className="block mt-8 text-center px-6 py-5 rounded-2xl bg-gradient-to-r from-pink-500 via-purple-600 to-blue-600 text-white font-black text-xl tracking-widest uppercase shadow-[0_0_30px_rgba(236,72,153,0.4)] hover:shadow-[0_0_40px_rgba(236,72,153,0.6)] transition-shadow"
             >
               Get Started
             </Link>

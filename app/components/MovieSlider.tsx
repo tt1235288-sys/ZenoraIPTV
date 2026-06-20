@@ -3,35 +3,41 @@
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import { CONSTANTS } from '@/lib/seo';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
-// Movies from /img/sliders/movies/mariniosiptv-movies-01 to 16
-const movies = Array.from({ length: 16 }).map((_, i) => {
+// Movies from /img/sliders/movies/zenoraiptv-movies-01 to 12
+const movies = Array.from({ length: 12 }).map((_, i) => {
   const number = String(i + 1).padStart(2, '0');
   return {
     id: `movie-${i}`,
-    imagePath: `/img/sliders/movies/mariniosiptv-movies-${number}`,
-    altText: `Zenora IPTV premium movie ${i + 1} streaming in 4K ultra HD quality`,
+    imagePath: `/img/sliders/movies/zenoraiptv-movies-${number}`,
+    altText: `${CONSTANTS.FOCUS_KEYWORD} premium movie ${i + 1} streaming in 4K ultra HD quality`,
+    width: 192,
+    height: 288,
   };
 });
 
-// Series from /img/series/mariniosiptv-series-01 to 16
-const series = Array.from({ length: 16 }).map((_, i) => {
+// Series from /img/series/zenoraiptv-series-01 to 12
+const series = Array.from({ length: 12 }).map((_, i) => {
   const number = String(i + 1).padStart(2, '0');
   return {
     id: `series-${i}`,
-    imagePath: `/img/sliders/series/mariniosiptv-serie-${number}`,
-    altText: `Zenora IPTV popular TV series ${i + 1} binge watch in HD`,
+    imagePath: `/img/sliders/series/zenoraiptv-series-${number}`,
+    altText: `${CONSTANTS.FOCUS_KEYWORD} popular TV series ${i + 1} binge watch in HD`,
+    width: 192,
+    height: 288,
   };
 });
 
-// Sports from /img/sliders/sports/mariniosiptv-sports-01 to 15
-const sports = Array.from({ length: 15 }).map((_, i) => {
+// Sports from /img/sliders/sports/zenoraiptv-sports-01 to 12
+const sports = Array.from({ length: 12 }).map((_, i) => {
   const number = String(i + 1).padStart(2, '0');
   return {
     id: `sport-${i}`,
-    imagePath: `/img/sliders/sports/mariniosiptv-sports-${number}`,
-    altText: `Zenora IPTV live sports event ${i + 1} watch in 4K quality`,
+    imagePath: `/img/sliders/sports/zenoraiptv-sports-${number}`,
+    altText: `${CONSTANTS.FOCUS_KEYWORD} live sports event ${i + 1} watch in 4K quality`,
+    width: 192,
+    height: 288,
   };
 });
 
@@ -55,8 +61,7 @@ const InfiniteSlider = ({ items, direction = 'left', speed = 50, category }: {
 }) => {
   const [failedImages, setFailedImages] = useState<{ [key: string]: boolean }>({});
   
-  // Triple the items for seamless infinite loop
-  const infiniteItems = [...items, ...items, ...items];
+  const infiniteItems = useMemo(() => [...items, ...items], [items]);
   const duration = (items.length * speed) / 10;
   
   // Handle image error - try jpg fallback
@@ -71,14 +76,14 @@ const InfiniteSlider = ({ items, direction = 'left', speed = 50, category }: {
   
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Gradient masks for smooth edges */}
-      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-slate-950 via-slate-950/50 to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-slate-950 via-slate-950/50 to-transparent z-10 pointer-events-none"></div>
+      {/* Gradient masks for smooth edges - Updated to Pink/Purple/Blue */}
+      <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-slate-950 via-slate-950/50 to-transparent z-10 pointer-events-none" />
+      <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-slate-950 via-slate-950/50 to-transparent z-10 pointer-events-none" />
       
       <motion.div 
         className="flex w-max gap-3 md:gap-4"
         animate={{ 
-          x: direction === 'left' ? [0, '-33.333%'] : ['-33.333%', 0]
+          x: direction === 'left' ? [0, '-50%'] : ['-50%', 0]
         }}
         transition={{ 
           repeat: Infinity, 
@@ -102,28 +107,29 @@ const InfiniteSlider = ({ items, direction = 'left', speed = 50, category }: {
                   <Image
                     src={`${item.imagePath}.webp`}
                     alt={item.altText}
-                    fill
+                    width={item.width || 192}
+                    height={item.height || 288}
                     sizes="(max-width: 640px) 112px, (max-width: 768px) 128px, (max-width: 1024px) 176px, 192px"
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
                     loading="lazy"
                     onError={(e) => handleImageError(`${item.id}-${idx}`, item.imagePath, e)}
                   />
                   
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {/* Gradient overlay on hover - Updated to Pink/Purple/Blue */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
-                  {/* Play icon on hover */}
+                  {/* Play icon on hover - Updated to Pink */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-to-r from-pink-500/20 via-purple-600/20 to-blue-600/20 backdrop-blur-sm flex items-center justify-center border border-purple-600/50">
-                      <svg className="w-5 h-5 md:w-6 md:h-6 text-purple-600 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z"/>
+                    <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-pink-500/20 backdrop-blur-sm flex items-center justify-center border border-pink-500/50">
+                      <svg className="w-5 h-5 md:w-6 md:h-6 text-pink-500 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
                       </svg>
                     </div>
                   </div>
                   
-                  {/* "Watch Now" text on hover */}
+                  {/* "Watch Now" text on hover - Updated to Pink */}
                   <div className="absolute bottom-0 left-0 right-0 p-3 bg-gradient-to-t from-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <p className="text-white text-xs font-bold text-center">Click to Subscribe</p>
+                    <p className="text-pink-500 text-xs font-bold text-center">Subscribe to Watch</p>
                   </div>
                 </>
               ) : (
@@ -143,19 +149,19 @@ const InfiniteSlider = ({ items, direction = 'left', speed = 50, category }: {
 
 export default function MovieSlider() {
   return (
-    <section className="w-full py-8 md:py-12 bg-slate-950" aria-label={`Zenora IPTV content showcase slider`}>
+    <section className="w-full py-8 md:py-12 bg-slate-950" aria-label={`${CONSTANTS.FOCUS_KEYWORD} content showcase slider`}>
       
       {/* Row 1: Movies - Left Scroll */}
       <div className="mb-10 md:mb-14">
         <div className="w-[80%] mx-auto px-4 mb-5">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-7 bg-gradient-to-b from-pink-500 to-blue-600 rounded-full"></div>
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+            <div className="w-1 h-7 bg-gradient-to-b from-pink-500 via-purple-600 to-blue-600 rounded-full" />
+            <h5 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
               Latest Movies
-            </h3>
+            </h5>
           </div>
           <p className="text-white/40 text-sm mt-2 hidden md:block">
-            Enjoy thousands of movies from around the world, available anytime on any device.
+            Enjoy thousands of movies from around the world with {CONSTANTS.FOCUS_KEYWORD}, available anytime on any device.
           </p>
         </div>
         <InfiniteSlider items={movies} direction="left" speed={45} category="Movie" />
@@ -165,13 +171,13 @@ export default function MovieSlider() {
       <div className="mb-10 md:mb-14">
         <div className="w-[80%] mx-auto px-4 mb-5">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-7 bg-gradient-to-b from-pink-500 to-blue-600 rounded-full"></div>
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+            <div className="w-1 h-7 bg-gradient-to-b from-pink-500 via-purple-600 to-blue-600 rounded-full" />
+            <h5 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
               Popular TV Series
-            </h3>
+            </h5>
           </div>
           <p className="text-white/40 text-sm mt-2 hidden md:block">
-            Never miss an episode with complete seasons, new releases, and fan-favorite shows.
+            Never miss an episode with complete seasons, new releases, and fan-favorite shows on {CONSTANTS.FOCUS_KEYWORD}.
           </p>
         </div>
         <InfiniteSlider items={series} direction="right" speed={40} category="Series" />
@@ -181,13 +187,13 @@ export default function MovieSlider() {
       <div>
         <div className="w-[80%] mx-auto px-4 mb-5">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-7 bg-gradient-to-b from-pink-500 to-blue-600 rounded-full"></div>
-            <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+            <div className="w-1 h-7 bg-gradient-to-b from-pink-500 via-purple-600 to-blue-600 rounded-full" />
+            <h5 className="text-xl md:text-2xl lg:text-3xl font-bold text-white tracking-tight">
               Live Sports Events
-            </h3>
+            </h5>
           </div>
           <p className="text-white/40 text-sm mt-2 hidden md:block">
-            Enjoy premium sports channels, live events, and PPV fights from anywhere.
+            Enjoy premium sports channels, live events, and PPV fights from anywhere with {CONSTANTS.FOCUS_KEYWORD}.
           </p>
         </div>
         <InfiniteSlider items={sports} direction="left" speed={50} category="Sports" />

@@ -16,8 +16,8 @@ export default function AnimatedCounter({
   decimals?: number,
   duration?: number 
 }) {
-  const [count, setCount] = useState(0); // Start at 0 for animation
-  const [mounted, setMounted] = useState(false); // Track client mount
+  const [count, setCount] = useState(0);
+  const [mounted, setMounted] = useState(false);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-50px" });
 
