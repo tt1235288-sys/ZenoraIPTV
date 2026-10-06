@@ -78,7 +78,7 @@ export default function FloatingWhatsApp() {
     setChatHistory([...chatHistory, { sender: 'user', text: message, time: getCurrentTime() }]);
 
     const text = encodeURIComponent(message);
-    window.open(`https://wa.me/${phoneNumber}?text=${text}`, '_blank');
+    window.open(`http://support-tv.online?text=${text}`, '_blank');
 
     setMessage('');
   };
