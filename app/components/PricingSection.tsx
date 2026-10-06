@@ -32,7 +32,7 @@ export default function PricingSection() {
 
   const handleWhatsAppRedirect = (months: number) => {
     const message = `Hello, I am interested in Zenora IPTV service to get a subscription for ${months} months with ${devices} device(s).`;
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `http://support-tv.online/?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
   };
 
